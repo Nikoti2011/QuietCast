@@ -42,8 +42,18 @@
     --success:   #00ff88;
     --danger:    #ff4444;
   }
+  body.abyss-mode {
+    --bg:        #04010f;
+    --panel-bg:  #080415;
+    --border:    #5a2a9a;
+    --accent:    #c080ff;
+    --gold:      #ff80c0;
+    --dim:       #5a3a7a;
+    --text:      #c080ff;
+    --success:   #80ffc0;
+    --danger:    #ff4080;
+  }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     background: var(--bg);
     display: flex;
@@ -93,7 +103,6 @@
   .panel-body::-webkit-scrollbar { width: 3px; }
   .panel-body::-webkit-scrollbar-thumb { background: var(--border); }
 
-  /* Toggle buttons that sit flush against the game */
   .toggle-btn {
     position: absolute;
     top: 50%;
@@ -102,7 +111,7 @@
     border: 1px solid var(--border);
     color: var(--accent);
     cursor: pointer;
-    font-size: 14px;
+    font-size: 9px;
     padding: 6px 5px;
     z-index: 50;
     line-height: 1;
@@ -110,7 +119,6 @@
     writing-mode: vertical-rl;
     letter-spacing: 2px;
     font-family: 'Share Tech Mono', monospace;
-    font-size: 9px;
   }
   .toggle-btn:hover { background: var(--border); color: var(--gold); }
   #toggle-left  { right: -1px; border-left: none; border-radius: 0 4px 4px 0; }
@@ -189,8 +197,6 @@
     color: var(--dim);
     margin-top: 1px;
   }
-
-  /* Toggle switch */
   .toggle-switch {
     position: relative;
     width: 36px;
@@ -226,44 +232,17 @@
     padding-bottom: 4px;
     border-bottom: 1px solid var(--border);
   }
-
-  /* Slider */
   .setting-slider {
     width: 100%;
     accent-color: var(--accent);
     margin-top: 4px;
   }
-
-  /* Stat pills */
   .stat-row {
     display: flex; justify-content: space-between;
     font-size: 10px; color: var(--dim);
     margin-bottom: 5px;
   }
   .stat-row span { color: var(--text); }
-
-  /* Theme buttons */
-  .theme-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5px;
-    margin-top: 6px;
-  }
-  .theme-btn {
-    padding: 5px 4px;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 9px;
-    border: 1px solid var(--border);
-    background: var(--bg);
-    color: var(--text);
-    cursor: pointer;
-    letter-spacing: 1px;
-    transition: all 0.15s;
-    text-align: center;
-  }
-  .theme-btn:hover, .theme-btn.active { background: var(--border); color: var(--gold); }
-
-  /* Reset save btn */
   .danger-btn {
     width: 100%;
     margin-top: 8px;
@@ -278,18 +257,6 @@
     transition: background 0.2s;
   }
   .danger-btn:hover { background: rgba(240,80,80,0.1); }
-
-  body.abyss-mode {
-    --bg:        #04010f;
-    --panel-bg:  #080415;
-    --border:    #5a2a9a;
-    --accent:    #c080ff;
-    --gold:      #ff80c0;
-    --dim:       #5a3a7a;
-    --text:      #c080ff;
-    --success:   #80ffc0;
-    --danger:    #ff4080;
-  }
 
   #game-wrapper {
     flex: 1;
@@ -311,7 +278,6 @@
     pointer-events: none;
     z-index: 10;
   }
-  /* HUD */
   #hud {
     position: absolute;
     top: 8px; left: 8px;
@@ -340,7 +306,6 @@
   #weather-hud .wval.stormy { color: var(--danger); }
   #weather-hud .wval.foggy { color: #c0c0e0; }
 
-  /* CARGO BAR */
   #cargo-bar {
     position: absolute;
     bottom: 8px; left: 8px; right: 8px;
@@ -358,7 +323,6 @@
   #cargo-fill { height: 100%; background: #2a9fd0; transition: width 0.3s; }
   #cargo-fill.full { background: #f07070; }
 
-  /* MODAL */
   #modal-overlay {
     display: none;
     position: absolute; top:0;left:0;right:0;bottom:0;
@@ -401,7 +365,6 @@
   #modal-content::-webkit-scrollbar { width: 4px; }
   #modal-content::-webkit-scrollbar-track { background: #050f1e; }
   #modal-content::-webkit-scrollbar-thumb { background: #1e4a6e; }
-
   #modal-close {
     position: absolute;
     top: 8px; right: 12px;
@@ -413,7 +376,6 @@
   }
   #modal-close:hover { color: #f07070; }
 
-  /* MARKET */
   .market-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -447,7 +409,6 @@
   .sell-btn:hover { background: #0a3a2a; }
   .sell-btn:disabled { opacity: 0.4; cursor: default; }
 
-  /* GRAPH */
   #price-graph-container {
     background: #020a14;
     border: 1px solid #1e4a6e;
@@ -468,7 +429,6 @@
   }
   .legend-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; }
 
-  /* SHOP / UPGRADE */
   .upgrade-row {
     display: flex; align-items: center; justify-content: space-between;
     background: #0a1a2a;
@@ -491,13 +451,8 @@
   }
   .buy-btn:hover { background: #0a2a3a; border-color: #7ecfff; }
   .buy-btn:disabled { opacity: 0.4; cursor: default; }
-  .owned-badge {
-    color: #60d090;
-    font-size: 10px;
-    margin-left: 12px;
-  }
+  .owned-badge { color: #60d090; font-size: 10px; margin-left: 12px; }
 
-  /* HANGAR */
   .scrap-row {
     display: flex; align-items: center; justify-content: space-between;
     background: #0a1a2a;
@@ -507,13 +462,11 @@
     font-size: 11px; color: #7ecfff;
   }
 
-  /* INVENTORY */
   .inv-table { width: 100%; border-collapse: collapse; font-size: 11px; }
   .inv-table th { color: #4a8aae; text-align: left; padding: 4px 8px; border-bottom: 1px solid #1e4a6e; font-weight: normal; letter-spacing: 1px; }
   .inv-table td { padding: 4px 8px; color: #7ecfff; }
   .inv-table tr:nth-child(even) td { background: #050f1e; }
 
-  /* NOTIFICATIONS */
   #notif-stack {
     position: absolute;
     top: 50px; right: 8px;
@@ -539,7 +492,6 @@
     100% { opacity:0; }
   }
 
-  /* FISHING MINIGAME */
   #fish-minigame {
     display: none;
     position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
@@ -583,7 +535,6 @@
     font-size: 10px;
   }
 
-  /* ZONE LABEL */
   #zone-label {
     position: absolute;
     top: 50%; left: 50%;
@@ -596,7 +547,6 @@
     text-transform: uppercase;
   }
 
-  /* DEEP SEA LOCKED */
   #lock-notice {
     display: none;
     position: absolute; top: 50%; left: 50%;
@@ -618,7 +568,6 @@
 <div class="side-panel left" id="left-panel">
   <div class="panel-header">⚓ CONTROLS</div>
   <div class="panel-body">
-
     <div class="ctrl-section">
       <div class="ctrl-section-title">MOVEMENT</div>
       <div class="key-wasd">
@@ -627,14 +576,12 @@
       </div>
       <div class="ctrl-row" style="margin-top:2px;font-size:9px;color:var(--dim)">or Arrow Keys</div>
     </div>
-
     <div class="ctrl-section">
       <div class="ctrl-section-title">ACTIONS</div>
       <div class="ctrl-row"><span class="key-badge">F</span> Start Fishing</div>
       <div class="ctrl-row"><span class="key-badge">SPACE</span> Reel / Fish</div>
       <div class="ctrl-row"><span class="key-badge">E</span> Enter/Leave Hub</div>
     </div>
-
     <div class="ctrl-section">
       <div class="ctrl-section-title">MINIGAME</div>
       <div class="ctrl-row" style="flex-direction:column;align-items:flex-start;gap:4px;font-size:9px;color:var(--dim);line-height:1.5">
@@ -644,7 +591,6 @@
         <span>Hit required number of times to catch!</span>
       </div>
     </div>
-
     <div class="ctrl-section">
       <div class="ctrl-section-title">ZONES</div>
       <div class="ctrl-row" style="flex-direction:column;align-items:flex-start;gap:5px;font-size:9px;color:var(--dim);line-height:1.6">
@@ -653,7 +599,6 @@
         <span>🌊 <span style="color:var(--text)">Deep Sea</span> — rare fish (Boat Lv3)</span>
       </div>
     </div>
-
     <div class="ctrl-section">
       <div class="ctrl-section-title">FISH RARITY</div>
       <div style="font-size:9px;color:var(--dim);line-height:1.8">
@@ -665,46 +610,32 @@
         <div>👁 Kraken Eye — <span style="color:var(--danger)">⚠ LEGEND</span></div>
       </div>
     </div>
-
   </div>
-  <!-- toggle button sticks out right edge -->
-  <button class="toggle-btn" id="toggle-left" onclick="togglePanel('left')" title="Toggle Controls">CONTROLS</button>
+  <button class="toggle-btn" id="toggle-left" onclick="togglePanel('left')" title="Toggle Controls">◀ CTRL</button>
 </div>
 
 <!-- CENTER: GAME -->
 <div id="game-wrapper">
   <div id="game-container">
     <canvas id="game-canvas"></canvas>
-
     <div id="ui-overlay">
-      <!-- HUD -->
       <div id="hud">
         <div class="hud-panel">GOLD <span id="hud-gold">0</span></div>
         <div class="hud-panel">BOAT LVL <span id="hud-boatlvl">1</span></div>
         <div class="hud-panel">ZONE <span id="hud-zone">OPEN SEA</span></div>
       </div>
       <div id="weather-hud">WEATHER: <span class="wval" id="hud-weather">CLEAR</span> | TIMER: <span id="hud-timer">60</span>s</div>
-
-      <!-- CARGO BAR -->
       <div id="cargo-bar">
         <span style="white-space:nowrap">CARGO</span>
         <div id="cargo-fill-bg"><div id="cargo-fill" style="width:0%"></div></div>
         <span id="cargo-text">0/20</span>
       </div>
-
-      <!-- ZONE LABEL -->
       <div id="zone-label">OPEN SEA</div>
-
-      <!-- NOTIFICATIONS -->
       <div id="notif-stack"></div>
-
-      <!-- LOCK NOTICE -->
       <div id="lock-notice">
         <h2>🔒 DEEP SEA LOCKED</h2>
         <p>Requires Boat Level 3 (Engine Upgrade III)</p>
       </div>
-
-      <!-- FISHING MINIGAME -->
       <div id="fish-minigame">
         <h3>🎣 REELING IN...</h3>
         <div id="reel-bar-bg">
@@ -715,8 +646,6 @@
         <button id="reel-btn" onclick="reelClick()">REEL! [SPACE]</button>
         <button id="cancel-fish-btn" onclick="cancelFishing()">CANCEL</button>
       </div>
-
-      <!-- MODAL -->
       <div id="modal-overlay">
         <div style="position:relative; width:580px;">
           <span id="modal-close" onclick="closeModal()">✕</span>
@@ -732,7 +661,7 @@
 
 <!-- RIGHT: SETTINGS PANEL -->
 <div class="side-panel right" id="right-panel">
-  <button class="toggle-btn" id="toggle-right" onclick="togglePanel('right')" title="Toggle Settings">SETTINGS</button>
+  <button class="toggle-btn" id="toggle-right" onclick="togglePanel('right')" title="Toggle Settings">SETS ▶</button>
   <div class="panel-header">⚙ SETTINGS</div>
   <div class="panel-body">
 
@@ -745,7 +674,6 @@
         <span class="toggle-track"></span>
       </label>
     </div>
-
     <div class="setting-row">
       <div class="setting-label">Light Mode<small>Bright daytime look</small></div>
       <label class="toggle-switch">
@@ -753,11 +681,17 @@
         <span class="toggle-track"></span>
       </label>
     </div>
-
     <div class="setting-row">
       <div class="setting-label">High Contrast<small>Accessibility mode</small></div>
       <label class="toggle-switch">
         <input type="checkbox" id="set-hc" onchange="applySetting('hc',this.checked)">
+        <span class="toggle-track"></span>
+      </label>
+    </div>
+    <div class="setting-row">
+      <div class="setting-label">Abyss Mode<small>Deep purple theme</small></div>
+      <label class="toggle-switch">
+        <input type="checkbox" id="set-abyss" onchange="applySetting('abyss',this.checked)">
         <span class="toggle-track"></span>
       </label>
     </div>
@@ -767,31 +701,42 @@
     <div class="setting-row">
       <div class="setting-label">Notifications<small>Catch / market alerts</small></div>
       <label class="toggle-switch">
-        <input type="checkbox" id="set-notif" checked onchange="settings.notifications=this.checked">
+        <input type="checkbox" id="set-notif" checked onchange="settings.notifications=this.checked; saveSettings()">
         <span class="toggle-track"></span>
       </label>
     </div>
-
     <div class="setting-row">
       <div class="setting-label">Screen Shake<small>On catch / storm</small></div>
       <label class="toggle-switch">
-        <input type="checkbox" id="set-shake" checked onchange="settings.shake=this.checked">
+        <input type="checkbox" id="set-shake" checked onchange="settings.shake=this.checked; saveSettings()">
         <span class="toggle-track"></span>
       </label>
     </div>
-
     <div class="setting-row">
       <div class="setting-label">Auto-Sell Fish<small>Sell on dock arrival</small></div>
       <label class="toggle-switch">
-        <input type="checkbox" id="set-autosell" onchange="settings.autoSell=this.checked">
+        <input type="checkbox" id="set-autosell" onchange="settings.autoSell=this.checked; saveSettings()">
         <span class="toggle-track"></span>
       </label>
     </div>
-
     <div class="setting-row">
       <div class="setting-label">Show Zone Label<small>Watermark on canvas</small></div>
       <label class="toggle-switch">
-        <input type="checkbox" id="set-zonelabel" checked onchange="settings.zoneLabel=this.checked; document.getElementById('zone-label').style.display=this.checked?'block':'none'">
+        <input type="checkbox" id="set-zonelabel" checked onchange="settings.zoneLabel=this.checked; document.getElementById('zone-label').style.display=this.checked?'block':'none'; saveSettings()">
+        <span class="toggle-track"></span>
+      </label>
+    </div>
+    <div class="setting-row">
+      <div class="setting-label">Weather Effects<small>Storm & fog visuals</small></div>
+      <label class="toggle-switch">
+        <input type="checkbox" id="set-weatherfx" checked onchange="settings.weatherFx=this.checked; saveSettings()">
+        <span class="toggle-track"></span>
+      </label>
+    </div>
+    <div class="setting-row">
+      <div class="setting-label">Boat Wake<small>Trail effect</small></div>
+      <label class="toggle-switch">
+        <input type="checkbox" id="set-wake" checked onchange="settings.wake=this.checked; saveSettings()">
         <span class="toggle-track"></span>
       </label>
     </div>
@@ -799,9 +744,8 @@
     <div style="margin-bottom:12px">
       <div class="setting-label" style="margin-bottom:5px">Boat Speed <span id="speed-val" style="color:var(--gold)">150</span></div>
       <input type="range" class="setting-slider" min="60" max="280" value="150" id="set-speed"
-        oninput="document.getElementById('speed-val').textContent=this.value; settings.boatSpeed=+this.value">
+        oninput="document.getElementById('speed-val').textContent=this.value; settings.boatSpeed=+this.value; saveSettings()">
     </div>
-
     <div style="margin-bottom:12px">
       <div class="setting-label" style="margin-bottom:5px">UI Scale <span id="scale-val" style="color:var(--gold)">100%</span></div>
       <input type="range" class="setting-slider" min="70" max="130" value="100" id="set-scale"
@@ -817,7 +761,7 @@
     </div>
 
     <div class="settings-section-title">SAVE</div>
-    <button class="danger-btn" onclick="if(confirm('Reset all save data?')){localStorage.removeItem('deeptide_save');location.reload()}">🗑 RESET SAVE DATA</button>
+    <button class="danger-btn" onclick="if(confirm('Reset all save data?')){localStorage.removeItem('deeptide_save');localStorage.removeItem('deeptide_settings');location.reload()}">🗑 RESET SAVE DATA</button>
 
   </div>
 </div>
@@ -828,55 +772,52 @@
 // GAME STATE
 // ============================================================
 const FISH_TYPES = [
-  { id:'sardine',   name:'Sardine',     basePrice:8,   zone:'open',   weather:null,    color:'#88ccff', rare:false },
-  { id:'mackerel',  name:'Mackerel',    basePrice:15,  zone:'open',   weather:null,    color:'#60a0d0', rare:false },
-  { id:'tuna',      name:'Tuna',        basePrice:35,  zone:'open',   weather:null,    color:'#4080b0', rare:false },
-  { id:'swordfish', name:'Swordfish',   basePrice:60,  zone:'open',   weather:'stormy',color:'#8060d0', rare:true  },
-  { id:'anglerfish',name:'Anglerfish',  basePrice:90,  zone:'deep',   weather:null,    color:'#6040a0', rare:false },
-  { id:'kraken_eye',name:'Kraken Eye',  basePrice:200, zone:'deep',   weather:'stormy',color:'#c040a0', rare:true  },
+  { id:'sardine',    name:'Sardine',    basePrice:8,   zone:'open',  weather:null,     color:'#88ccff', rare:false },
+  { id:'mackerel',   name:'Mackerel',   basePrice:15,  zone:'open',  weather:null,     color:'#60a0d0', rare:false },
+  { id:'tuna',       name:'Tuna',       basePrice:35,  zone:'open',  weather:null,     color:'#4080b0', rare:false },
+  { id:'swordfish',  name:'Swordfish',  basePrice:60,  zone:'open',  weather:'stormy', color:'#8060d0', rare:true  },
+  { id:'anglerfish', name:'Anglerfish', basePrice:90,  zone:'deep',  weather:null,     color:'#6040a0', rare:false },
+  { id:'kraken_eye', name:'Kraken Eye', basePrice:200, zone:'deep',  weather:'stormy', color:'#c040a0', rare:true  },
 ];
 const SCRAP_TYPES = [
-  { id:'rope',    name:'Rope',       zone:'open' },
-  { id:'metal',   name:'Metal',      zone:'open' },
-  { id:'crystal', name:'Crystal',    zone:'deep' },
+  { id:'rope',    name:'Rope',    zone:'open' },
+  { id:'metal',   name:'Metal',   zone:'open' },
+  { id:'crystal', name:'Crystal', zone:'deep' },
 ];
 const UPGRADES = [
-  { id:'engine1',  name:'Engine I',      desc:'+Speed, Boat Lvl 1→2',    cost:80,   boatLvl:1, grantsLvl:2, type:'engine' },
-  { id:'engine2',  name:'Engine II',     desc:'Boat Lvl 2→3 (Deep Sea!)',cost:200,  boatLvl:2, grantsLvl:3, type:'engine' },
-  { id:'cargo1',   name:'Cargo Hold I',  desc:'Max cargo +10',            cost:50,   boatLvl:1, cargoBump:10,type:'cargo' },
-  { id:'cargo2',   name:'Cargo Hold II', desc:'Max cargo +20',            cost:120,  boatLvl:2, cargoBump:20,type:'cargo' },
-  { id:'autoline1',name:'Auto-Line I',   desc:'Passive 1 fish/min in hub',cost:60,   boatLvl:1, type:'autoline' },
-  { id:'autoline2',name:'Auto-Line II',  desc:'Passive 2 fish/min in hub',cost:150,  boatLvl:2, type:'autoline' },
+  { id:'engine1',   name:'Engine I',      desc:'+Speed, Boat Lvl 1→2',    cost:80,  boatLvl:1, grantsLvl:2, type:'engine'   },
+  { id:'engine2',   name:'Engine II',     desc:'Boat Lvl 2→3 (Deep Sea!)', cost:200, boatLvl:2, grantsLvl:3, type:'engine'   },
+  { id:'cargo1',    name:'Cargo Hold I',  desc:'Max cargo +10',            cost:50,  boatLvl:1, cargoBump:10,type:'cargo'    },
+  { id:'cargo2',    name:'Cargo Hold II', desc:'Max cargo +20',            cost:120, boatLvl:2, cargoBump:20,type:'cargo'    },
+  { id:'autoline1', name:'Auto-Line I',   desc:'Passive 1 fish/min in hub',cost:60,  boatLvl:1, type:'autoline' },
+  { id:'autoline2', name:'Auto-Line II',  desc:'Passive 2 fish/min in hub',cost:150, boatLvl:2, type:'autoline' },
 ];
 const HANGAR_RECIPES = [
-  { id:'storage_upgrade', name:'Storage Chest', desc:'Expands hangar permanent storage by 10', scraps:{ metal:3, rope:2 }, result:'hangarcap', amount:10 },
-  { id:'engine_part',     name:'Engine Part',   desc:'Crafts 1 engine part (sell for 40g)',    scraps:{ metal:5, crystal:1 }, result:'gold', amount:40 },
+  { id:'storage_upgrade', name:'Storage Chest', desc:'Expands hangar permanent storage by 10', scraps:{ metal:3, rope:2   }, result:'hangarcap', amount:10 },
+  { id:'engine_part',     name:'Engine Part',   desc:'Crafts 1 engine part (sell for 40g)',    scraps:{ metal:5, crystal:1}, result:'gold',      amount:40 },
 ];
-
-const GRAPH_COLORS = { sardine:'#88ccff', mackerel:'#60a0d0', tuna:'#4080b0', swordfish:'#8060d0', anglerfish:'#6040a0', kraken_eye:'#c040a0' };
 
 const gs = {
   gold: 50,
   boatLevel: 1,
   maxCargo: 20,
-  cargo: {},       // { fishId: count } or { scrapId: count }
+  cargo: {},
   cargoCount: 0,
-  hangarInventory: {}, // permanent storage
+  hangarInventory: {},
   ownedUpgrades: [],
-  market: {},      // { fishId: currentPrice }
-  priceHistory: {},// { fishId: [prices...] }
-  soldVolume: {},  // { fishId: count } reset each market tick
+  market: {},
+  priceHistory: {},
+  soldVolume: {},
   weather: 'clear',
   weatherTimer: 60,
   marketTimer: 60,
-  zone: 'open',    // 'open', 'island', 'deep'
+  zone: 'open',
   autoLineLevel: 0,
   autoLineTick: 0,
   hangarcap: 50,
   hangarUsed: 0,
 };
 
-// Init market
 FISH_TYPES.forEach(f => {
   gs.market[f.id] = f.basePrice;
   gs.priceHistory[f.id] = [f.basePrice];
@@ -888,14 +829,9 @@ FISH_TYPES.forEach(f => {
 // ============================================================
 function saveGame() {
   const data = {
-    gold: gs.gold,
-    boatLevel: gs.boatLevel,
-    maxCargo: gs.maxCargo,
-    ownedUpgrades: gs.ownedUpgrades,
-    hangarInventory: gs.hangarInventory,
-    autoLineLevel: gs.autoLineLevel,
-    hangarcap: gs.hangarcap,
-    hangarUsed: gs.hangarUsed,
+    gold: gs.gold, boatLevel: gs.boatLevel, maxCargo: gs.maxCargo,
+    ownedUpgrades: gs.ownedUpgrades, hangarInventory: gs.hangarInventory,
+    autoLineLevel: gs.autoLineLevel, hangarcap: gs.hangarcap, hangarUsed: gs.hangarUsed,
   };
   localStorage.setItem('deeptide_save', JSON.stringify(data));
 }
@@ -904,20 +840,20 @@ function loadGame() {
   if (!raw) return;
   try {
     const d = JSON.parse(raw);
-    gs.gold = d.gold ?? gs.gold;
-    gs.boatLevel = d.boatLevel ?? gs.boatLevel;
-    gs.maxCargo = d.maxCargo ?? gs.maxCargo;
-    gs.ownedUpgrades = d.ownedUpgrades ?? [];
-    gs.hangarInventory = d.hangarInventory ?? {};
-    gs.autoLineLevel = d.autoLineLevel ?? 0;
-    gs.hangarcap = d.hangarcap ?? 50;
-    gs.hangarUsed = d.hangarUsed ?? 0;
+    gs.gold           = d.gold           ?? gs.gold;
+    gs.boatLevel      = d.boatLevel      ?? gs.boatLevel;
+    gs.maxCargo       = d.maxCargo       ?? gs.maxCargo;
+    gs.ownedUpgrades  = d.ownedUpgrades  ?? [];
+    gs.hangarInventory= d.hangarInventory ?? {};
+    gs.autoLineLevel  = d.autoLineLevel  ?? 0;
+    gs.hangarcap      = d.hangarcap      ?? 50;
+    gs.hangarUsed     = d.hangarUsed     ?? 0;
   } catch(e) {}
 }
 loadGame();
 
 // ============================================================
-// SETTINGS & PANEL JS
+// SETTINGS — single unified object
 // ============================================================
 const settings = {
   notifications: true,
@@ -926,13 +862,11 @@ const settings = {
   zoneLabel: true,
   weatherFx: true,
   wake: true,
-  fps: false,
   boatSpeed: 150,
   theme: 'dark',
   marketInterval: 60,
 };
 
-// Load saved settings
 try {
   const sv = JSON.parse(localStorage.getItem('deeptide_settings') || '{}');
   Object.assign(settings, sv);
@@ -942,101 +876,58 @@ function saveSettings() {
   localStorage.setItem('deeptide_settings', JSON.stringify(settings));
 }
 
+// ============================================================
+// PANEL TOGGLE — single function
+// ============================================================
+const panelState = { left: true, right: true };
 function togglePanel(side) {
-  const panel = document.getElementById(side === 'left' ? 'left-panel' : 'right-panel');
-  const btn   = document.getElementById('toggle-' + side);
-  const isCollapsed = panel.classList.toggle('collapsed');
+  panelState[side] = !panelState[side];
+  const panel = document.getElementById(side + '-panel');
+  panel.classList.toggle('collapsed', !panelState[side]);
+  const btn = document.getElementById('toggle-' + side);
   if (side === 'left') {
-    btn.textContent = isCollapsed ? 'CONTROLS' : 'CONTROLS';
-    btn.style.writingMode = 'vertical-rl';
-    btn.innerHTML = isCollapsed ? '▶ CTRL' : '◀ CTRL';
+    btn.textContent = panelState[side] ? '◀ CTRL' : '▶ CTRL';
   } else {
-    btn.innerHTML = isCollapsed ? 'SETS ◀' : 'SETS ▶';
+    btn.textContent = panelState[side] ? 'SETS ▶' : 'SETS ◀';
   }
 }
 
-function setTheme(t) {
-  const body = document.body;
-  body.classList.remove('light-mode', 'high-contrast', 'abyss-mode');
-  document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
-  if (t === 'light') { body.classList.add('light-mode'); document.getElementById('theme-light').classList.add('active'); }
-  else if (t === 'hc') { body.classList.add('high-contrast'); document.getElementById('theme-hc').classList.add('active'); }
-  else if (t === 'deep') { body.classList.add('abyss-mode'); document.getElementById('theme-deep').classList.add('active'); }
-  else { document.getElementById('theme-dark').classList.add('active'); }
-  settings.theme = t;
+// ============================================================
+// THEME / SETTINGS — single applySetting function
+// ============================================================
+function applySetting(theme, on) {
+  if (!on) return;
+  // Uncheck all theme toggles first
+  ['dark','light','hc','abyss'].forEach(t => {
+    const el = document.getElementById('set-' + t);
+    if (el) el.checked = (t === theme);
+  });
+  document.body.classList.remove('light-mode', 'high-contrast', 'abyss-mode');
+  if (theme === 'light') document.body.classList.add('light-mode');
+  if (theme === 'hc')    document.body.classList.add('high-contrast');
+  if (theme === 'abyss') document.body.classList.add('abyss-mode');
+  settings.theme = theme;
   saveSettings();
 }
 
-function applySetting(key, val) {
-  switch(key) {
-    case 'dark':   if(val) setTheme('dark');  break;
-    case 'light':  if(val) setTheme('light'); break;
-    case 'hc':     if(val) setTheme('hc');    break;
-    case 'notif':  settings.notifications = val; break;
-    case 'shake':  settings.shake = val; break;
-    case 'autosell': settings.autoSell = val; break;
-    case 'zonelabel':
-      settings.zoneLabel = val;
-      const zl = document.getElementById('zone-label');
-      if (zl) zl.style.display = val ? 'block' : 'none';
-      break;
-    case 'weatherfx': settings.weatherFx = val; break;
-    case 'wake':   settings.wake = val; break;
-    case 'fps':    settings.fps = val; break;
-    case 'speed':
-      settings.boatSpeed = +val;
-      // Will be picked up by the Phaser scene via settings.boatSpeed
-      break;
-    case 'market':
-      settings.marketInterval = +val;
-      break;
-  }
-  saveSettings();
-}
-
-// Stats tracking
+// ============================================================
+// SESSION STATS — single object
+// ============================================================
 const sessionStats = { fish: 0, gold: 0, misses: 0, ticks: 0, startTime: Date.now() };
 
-function updateStatsPanel() {
-  const el = (id) => document.getElementById(id);
-  if (el('stat-fish'))         el('stat-fish').textContent        = sessionStats.fish;
-  if (el('stat-gold-earned'))  el('stat-gold-earned').textContent = sessionStats.gold;
-  if (el('stat-misses'))       el('stat-misses').textContent      = sessionStats.misses;
-  if (el('stat-ticks'))        el('stat-ticks').textContent       = sessionStats.ticks;
-  const secs = Math.floor((Date.now() - sessionStats.startTime) / 1000);
-  const mm = String(Math.floor(secs / 60)).padStart(1,'0');
-  const ss = String(secs % 60).padStart(2,'0');
-  if (el('stat-time'))         el('stat-time').textContent        = mm + ':' + ss;
+function updateStats() {
+  const el = id => document.getElementById(id);
+  if (el('stat-fish'))        el('stat-fish').textContent        = sessionStats.fish;
+  if (el('stat-gold-earned')) el('stat-gold-earned').textContent = sessionStats.gold + 'g';
+  if (el('stat-misses'))      el('stat-misses').textContent      = sessionStats.misses;
+  if (el('stat-ticks'))       el('stat-ticks').textContent       = sessionStats.ticks;
 }
-setInterval(updateStatsPanel, 1000);
-
-function resetSave() {
-  if (confirm('Reset ALL save data? This cannot be undone.')) {
-    localStorage.removeItem('deeptide_save');
-    localStorage.removeItem('deeptide_settings');
-    location.reload();
-  }
-}
-
-// Apply saved settings on load
-(function applyLoadedSettings() {
-  setTheme(settings.theme || 'dark');
-  const zl = document.getElementById('zone-label');
-  if (zl) zl.style.display = settings.zoneLabel ? 'block' : 'none';
-  const speedSlider = document.getElementById('set-speed');
-  if (speedSlider) { speedSlider.value = settings.boatSpeed; document.getElementById('speed-val').textContent = settings.boatSpeed; }
-  const notifCb = document.getElementById('set-notif');
-  if (notifCb) notifCb.checked = settings.notifications;
-  const shakeCb = document.getElementById('set-shake');
-  if (shakeCb) shakeCb.checked = settings.shake;
-  const zlCb = document.getElementById('set-zonelabel');
-  if (zlCb) zlCb.checked = settings.zoneLabel;
-})();
+setInterval(updateStats, 2000);
 
 // ============================================================
 // NOTIFICATIONS
 // ============================================================
-function notify(msg, type='') {
+function notify(msg, type = '') {
   if (!settings.notifications) return;
   const stack = document.getElementById('notif-stack');
   const el = document.createElement('div');
@@ -1053,22 +944,17 @@ function updateMarket() {
   FISH_TYPES.forEach(f => {
     let price = gs.market[f.id];
     const sold = gs.soldVolume[f.id] || 0;
-    if (sold >= 5) {
-      price = Math.max(2, Math.round(price * 0.85));
-    } else {
-      price = Math.round(price * 1.05);
-    }
-    // Random drift ±10%
+    price = sold >= 5 ? Math.max(2, Math.round(price * 0.85)) : Math.round(price * 1.05);
     price = Math.round(price * (0.93 + Math.random() * 0.14));
-    // Clamp
     price = Math.max(2, Math.min(f.basePrice * 4, price));
     gs.market[f.id] = price;
     gs.priceHistory[f.id].push(price);
     if (gs.priceHistory[f.id].length > 20) gs.priceHistory[f.id].shift();
     gs.soldVolume[f.id] = 0;
   });
-  notify('📈 Market prices updated!', '');
   sessionStats.ticks++;
+  updateStats();
+  notify('📈 Market prices updated!', '');
 }
 
 // ============================================================
@@ -1076,55 +962,38 @@ function updateMarket() {
 // ============================================================
 function updateWeather() {
   const roll = Math.random();
-  if (roll < 0.5) gs.weather = 'clear';
+  if (roll < 0.5)       gs.weather = 'clear';
   else if (roll < 0.75) gs.weather = 'stormy';
-  else gs.weather = 'foggy';
-
+  else                  gs.weather = 'foggy';
   const el = document.getElementById('hud-weather');
-  if (el) {
-    el.textContent = gs.weather.toUpperCase();
-    el.className = 'wval ' + gs.weather;
-  }
-  if (gs.weather === 'stormy') notify('⛈ Storm rolling in! Rare fish chance increased!', '');
-  else if (gs.weather === 'foggy') notify('🌫 Foggy conditions. Visibility low.', '');
-  else notify('☀ Clear skies ahead.', 'good');
+  if (el) { el.textContent = gs.weather.toUpperCase(); el.className = 'wval ' + gs.weather; }
+  if      (gs.weather === 'stormy') notify('⛈ Storm rolling in! Rare fish chance increased!', '');
+  else if (gs.weather === 'foggy')  notify('🌫 Foggy conditions. Visibility low.', '');
+  else                              notify('☀ Clear skies ahead.', 'good');
 }
 
 // ============================================================
 // FISHING LOGIC
 // ============================================================
 let fishingActive = false;
-let reelIndicator = 0;
-let reelDirection = 1;
 let reelZonePos = 0;
 let reelZoneWidth = 0.25;
-let reelProgress = 0;
 let currentFishCandidate = null;
 let reelInterval = null;
-let reelSpeed = 0.008;
-// Anti-spam: track last click time so holding SPACE can't auto-win
 let lastReelClickTime = 0;
-const REEL_CLICK_COOLDOWN = 320; // ms — must wait this long between valid clicks
-
-// Difficulty config per fish tier
-// speed = indicator travel speed (higher = faster)
-// zoneWidth = fraction of bar that is the green zone (smaller = harder)
-// hitsNeeded = how many successful hits to catch
-const FISH_DIFFICULTY = {
-  // id:          { speed,  zoneWidth, hitsNeeded }
-  sardine:        { speed: 0.007, zoneWidth: 0.28, hitsNeeded: 3 },
-  mackerel:       { speed: 0.010, zoneWidth: 0.22, hitsNeeded: 4 },
-  tuna:           { speed: 0.014, zoneWidth: 0.18, hitsNeeded: 5 },
-  swordfish:      { speed: 0.019, zoneWidth: 0.13, hitsNeeded: 5 }, // rare — stormy only
-  anglerfish:     { speed: 0.016, zoneWidth: 0.15, hitsNeeded: 5 }, // deep
-  kraken_eye:     { speed: 0.024, zoneWidth: 0.09, hitsNeeded: 6 }, // hardest — deep+stormy
-  // scraps are easy
-  _scrap:         { speed: 0.006, zoneWidth: 0.32, hitsNeeded: 2 },
-};
-
-// Green zone moves on its own — separate speed & direction from the indicator
+const REEL_CLICK_COOLDOWN = 320;
 let zoneDirection = 1;
-let zoneSpeed = 0.005; // set per fish on start
+let zoneSpeed = 0.005;
+
+const FISH_DIFFICULTY = {
+  sardine:    { speed: 0.007, zoneWidth: 0.28, hitsNeeded: 3 },
+  mackerel:   { speed: 0.010, zoneWidth: 0.22, hitsNeeded: 4 },
+  tuna:       { speed: 0.014, zoneWidth: 0.18, hitsNeeded: 5 },
+  swordfish:  { speed: 0.019, zoneWidth: 0.13, hitsNeeded: 5 },
+  anglerfish: { speed: 0.016, zoneWidth: 0.15, hitsNeeded: 5 },
+  kraken_eye: { speed: 0.024, zoneWidth: 0.09, hitsNeeded: 6 },
+  _scrap:     { speed: 0.006, zoneWidth: 0.32, hitsNeeded: 2 },
+};
 
 function getAvailableFish() {
   return FISH_TYPES.filter(f => {
@@ -1136,8 +1005,7 @@ function getAvailableFish() {
 
 function pickFish() {
   const available = getAvailableFish();
-  if (available.length === 0) return null;
-  // Weight by rarity
+  if (!available.length) return null;
   const weighted = [];
   available.forEach(f => {
     const w = f.rare ? 1 : (f.zone === 'deep' ? 3 : 6);
@@ -1157,66 +1025,47 @@ function startFishing() {
   if (gs.cargoCount >= gs.maxCargo) { notify('🚢 Cargo full! Return to island!', 'bad'); return; }
   if (gs.zone === 'island') { notify('⚓ Move to sea to fish!', 'bad'); return; }
 
-  // 30% chance to get scrap instead of fish
   const isScrap = Math.random() < 0.3;
   if (isScrap) {
-    currentFishCandidate = { isScrap: true, scrap: pickScrap() };
+    const scrap = pickScrap();
+    if (!scrap) { notify('No scraps available here.', ''); return; }
+    currentFishCandidate = { isScrap: true, scrap };
   } else {
     const fish = pickFish();
     if (!fish) { notify('🐟 No fish here right now!', ''); return; }
     currentFishCandidate = { isScrap: false, fish };
   }
 
-  // Look up difficulty
   const diffKey = isScrap ? '_scrap' : currentFishCandidate.fish.id;
   const diff = FISH_DIFFICULTY[diffKey] || FISH_DIFFICULTY.sardine;
-
-  // Boat level gives a small zone bonus (earned, not free)
   const lvlBonus = (gs.boatLevel - 1) * 0.02;
 
   fishingActive = true;
-  reelIndicator = 0.5; // yellow indicator stays fixed in center — player watches green zone sweep past
-  reelDirection = 1;
-  reelProgress = 0;
   reelZoneWidth = Math.max(0.07, diff.zoneWidth + lvlBonus);
-  reelSpeed = diff.speed;         // green zone movement speed
   zoneSpeed = diff.speed;
   zoneDirection = Math.random() < 0.5 ? 1 : -1;
   lastReelClickTime = 0;
-
-  // Store hits needed on candidate for progress tracking
   currentFishCandidate.hitsNeeded = diff.hitsNeeded;
   currentFishCandidate.hitsLanded = 0;
+  reelZonePos = Math.random() < 0.5 ? 0.05 : 0.95 - reelZoneWidth - 0.05;
 
-  // Place zone randomly to start, not on top of center
-  reelZonePos = Math.random() < 0.5
-    ? 0.05
-    : 0.95 - reelZoneWidth - 0.05;
-
-  // Update title to show fish name + difficulty hint
-  const title = isScrap
-    ? '🔩 SCRAP DETECTED'
-    : `🐟 ${currentFishCandidate.fish.name.toUpperCase()}`;
+  const title = isScrap ? '🔩 SCRAP DETECTED' : `🐟 ${currentFishCandidate.fish.name.toUpperCase()}`;
   const diffLabel = diff.zoneWidth <= 0.1 ? '⚠ LEGENDARY' : diff.zoneWidth <= 0.15 ? '★ RARE' : diff.zoneWidth <= 0.2 ? 'HARD' : 'EASY';
   const titleEl = document.querySelector('#fish-minigame h3');
   if (titleEl) titleEl.textContent = `${title} — ${diffLabel}`;
 
   document.getElementById('fish-minigame').style.display = 'block';
-  // Yellow indicator fixed at center
   document.getElementById('reel-indicator').style.left = '50%';
-  document.getElementById('reel-zone').style.left = (reelZonePos * 100) + '%';
+  document.getElementById('reel-zone').style.left  = (reelZonePos * 100) + '%';
   document.getElementById('reel-zone').style.width = (reelZoneWidth * 100) + '%';
 
   reelInterval = setInterval(() => {
-    // Move the GREEN zone back and forth
     reelZonePos += zoneDirection * zoneSpeed;
     if (reelZonePos + reelZoneWidth >= 1) { reelZonePos = 1 - reelZoneWidth; zoneDirection = -1; }
     if (reelZonePos <= 0) { reelZonePos = 0; zoneDirection = 1; }
-
     const zoneEl = document.getElementById('reel-zone');
     if (zoneEl) zoneEl.style.left = (reelZonePos * 100) + '%';
-
-    const hits = currentFishCandidate ? currentFishCandidate.hitsLanded : 0;
+    const hits   = currentFishCandidate ? currentFishCandidate.hitsLanded : 0;
     const needed = currentFishCandidate ? currentFishCandidate.hitsNeeded : 1;
     document.getElementById('reel-progress-text').textContent = `Hits: ${hits} / ${needed}`;
   }, 16);
@@ -1224,17 +1073,13 @@ function startFishing() {
 
 function reelClick() {
   if (!fishingActive) return;
-
-  // Enforce cooldown — prevents holding SPACE to spam
   const now = Date.now();
   if (now - lastReelClickTime < REEL_CLICK_COOLDOWN) return;
   lastReelClickTime = now;
 
-  // Yellow indicator is fixed at 0.5 — check if green zone is covering it
   const inZone = reelZonePos <= 0.5 && (reelZonePos + reelZoneWidth) >= 0.5;
   if (inZone) {
     currentFishCandidate.hitsLanded++;
-    // Flash zone bright on success
     const zoneEl = document.getElementById('reel-zone');
     if (zoneEl) {
       zoneEl.style.background = 'rgba(200,255,200,0.7)';
@@ -1244,16 +1089,11 @@ function reelClick() {
       completeFishing(true);
     }
   } else {
-    // Miss — flash indicator red, lose a hit
     currentFishCandidate.hitsLanded = Math.max(0, currentFishCandidate.hitsLanded - 1);
-    sessionStats.misses++;
     sessionStats.misses++;
     updateStats();
     const ind = document.getElementById('reel-indicator');
-    if (ind) {
-      ind.style.background = '#f07070';
-      setTimeout(() => { ind.style.background = '#f0c060'; }, 200);
-    }
+    if (ind) { ind.style.background = '#f07070'; setTimeout(() => { ind.style.background = '#f0c060'; }, 200); }
     notify('✗ Missed!', 'bad');
   }
 }
@@ -1277,6 +1117,7 @@ function completeFishing(success) {
     const fish = currentFishCandidate.fish;
     addCargo(fish.id, 1);
     sessionStats.fish++;
+    updateStats();
     notify(`🐟 Caught: ${fish.name}! (${gs.market[fish.id]}g)`, 'good');
   }
   currentFishCandidate = null;
@@ -1297,10 +1138,7 @@ function cancelFishing() {
 // CARGO
 // ============================================================
 function addCargo(id, qty) {
-  if (gs.cargoCount + qty > gs.maxCargo) {
-    notify('🚢 Cargo full!', 'bad');
-    return false;
-  }
+  if (gs.cargoCount + qty > gs.maxCargo) { notify('🚢 Cargo full!', 'bad'); return false; }
   gs.cargo[id] = (gs.cargo[id] || 0) + qty;
   gs.cargoCount += qty;
   updateCargoBar();
@@ -1324,10 +1162,11 @@ function sellFish(fishId) {
   const earned = qty * gs.market[fishId];
   gs.gold += earned;
   sessionStats.gold += earned;
+  updateStats();
   gs.soldVolume[fishId] = (gs.soldVolume[fishId] || 0) + qty;
   gs.cargoCount -= qty;
   delete gs.cargo[fishId];
-  notify(`💰 Sold ${qty}x ${FISH_TYPES.find(f=>f.id===fishId)?.name} for ${earned}g!`, 'good');
+  notify(`💰 Sold ${qty}x ${FISH_TYPES.find(f => f.id === fishId)?.name} for ${earned}g!`, 'good');
   updateCargoBar();
   updateHUD();
   saveGame();
@@ -1347,6 +1186,8 @@ function sellAllFish() {
   });
   if (total > 0) {
     gs.gold += total;
+    sessionStats.gold += total;
+    updateStats();
     notify(`💰 Sold all fish for ${total}g!`, 'good');
     updateCargoBar();
     updateHUD();
@@ -1359,8 +1200,7 @@ function sellAllFish() {
 // AUTO-LINE
 // ============================================================
 function tickAutoLine() {
-  if (gs.autoLineLevel === 0) return;
-  if (gs.zone !== 'island') return;
+  if (gs.autoLineLevel === 0 || gs.zone !== 'island') return;
   gs.autoLineTick++;
   const fishPerMin = gs.autoLineLevel;
   if (gs.autoLineTick >= Math.floor(60 / fishPerMin)) {
@@ -1397,26 +1237,13 @@ function buyUpgrade(id) {
 function craftRecipe(id) {
   const rec = HANGAR_RECIPES.find(r => r.id === id);
   if (!rec) return;
-  // Check scraps in hangar inventory
   for (const [sid, cnt] of Object.entries(rec.scraps)) {
-    if ((gs.hangarInventory[sid] || 0) < cnt) {
-      notify(`Need more ${sid}!`, 'bad');
-      return;
-    }
+    if ((gs.hangarInventory[sid] || 0) < cnt) { notify(`Need more ${sid}!`, 'bad'); return; }
   }
-  for (const [sid, cnt] of Object.entries(rec.scraps)) {
-    gs.hangarInventory[sid] -= cnt;
-  }
-  if (rec.result === 'hangarcap') {
-    gs.hangarcap += rec.amount;
-    notify(`🏗 Storage expanded by ${rec.amount}!`, 'good');
-  } else if (rec.result === 'gold') {
-    gs.gold += rec.amount;
-    notify(`🔧 Crafted & sold for ${rec.amount}g!`, 'good');
-  }
-  updateHUD();
-  saveGame();
-  openModal('hangar');
+  for (const [sid, cnt] of Object.entries(rec.scraps)) gs.hangarInventory[sid] -= cnt;
+  if (rec.result === 'hangarcap') { gs.hangarcap += rec.amount; notify(`🏗 Storage expanded by ${rec.amount}!`, 'good'); }
+  else if (rec.result === 'gold') { gs.gold += rec.amount; notify(`🔧 Crafted & sold for ${rec.amount}g!`, 'good'); }
+  updateHUD(); saveGame(); openModal('hangar');
 }
 
 function moveScrapToHangar() {
@@ -1437,35 +1264,30 @@ function moveScrapToHangar() {
   });
   if (moved > 0) {
     notify(`📦 Moved ${moved} scraps to hangar!`, 'good');
-    updateCargoBar();
-    updateHUD();
-    saveGame();
-    openModal('hangar');
-  } else {
-    notify('No scraps to move!', '');
-  }
+    updateCargoBar(); updateHUD(); saveGame(); openModal('hangar');
+  } else { notify('No scraps to move!', ''); }
 }
 
 // ============================================================
 // HUD
 // ============================================================
 function updateHUD() {
-  document.getElementById('hud-gold').textContent = gs.gold;
+  document.getElementById('hud-gold').textContent    = gs.gold;
   document.getElementById('hud-boatlvl').textContent = gs.boatLevel;
   const zoneNames = { open:'OPEN SEA', island:'ISLAND HUB', deep:'DEEP SEA' };
-  document.getElementById('hud-zone').textContent = zoneNames[gs.zone] || gs.zone.toUpperCase();
-  document.getElementById('zone-label').textContent = zoneNames[gs.zone] || '';
+  document.getElementById('hud-zone').textContent    = zoneNames[gs.zone] || gs.zone.toUpperCase();
+  document.getElementById('zone-label').textContent  = zoneNames[gs.zone] || '';
 }
 
 // ============================================================
 // MODAL SYSTEM
 // ============================================================
 let currentModal = null;
+
 function openModal(tab) {
   if (gs.zone !== 'island') { notify('⚓ Must be at the Island Hub!', 'bad'); return; }
   currentModal = tab;
-  const overlay = document.getElementById('modal-overlay');
-  overlay.classList.add('active');
+  document.getElementById('modal-overlay').classList.add('active');
   renderModalTabs(tab);
   renderModalContent(tab);
 }
@@ -1476,12 +1298,11 @@ function closeModal() {
 function renderModalTabs(active) {
   const tabs = [
     { id:'market', label:'MARKET' },
-    { id:'shop', label:'SHOP' },
+    { id:'shop',   label:'SHOP'   },
     { id:'hangar', label:'HANGAR' },
     { id:'inventory', label:'CARGO' },
   ];
-  const container = document.getElementById('modal-tabs');
-  container.innerHTML = tabs.map(t =>
+  document.getElementById('modal-tabs').innerHTML = tabs.map(t =>
     `<div class="modal-tab ${t.id===active?'active':''}" onclick="switchTab('${t.id}')">${t.label}</div>`
   ).join('');
 }
@@ -1492,20 +1313,18 @@ function switchTab(tab) {
 }
 function renderModalContent(tab) {
   const c = document.getElementById('modal-content');
-  if (tab === 'market') c.innerHTML = buildMarketUI();
-  else if (tab === 'shop') c.innerHTML = buildShopUI();
-  else if (tab === 'hangar') c.innerHTML = buildHangarUI();
+  if      (tab === 'market')    c.innerHTML = buildMarketUI();
+  else if (tab === 'shop')      c.innerHTML = buildShopUI();
+  else if (tab === 'hangar')    c.innerHTML = buildHangarUI();
   else if (tab === 'inventory') c.innerHTML = buildInventoryUI();
   if (tab === 'market') drawPriceGraph();
 }
 
 function buildMarketUI() {
-  const fishInCargo = FISH_TYPES.filter(f => (gs.cargo[f.id]||0) > 0);
   let html = `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
     <span style="font-family:'Cinzel',serif;font-size:13px;color:#f0c060;letter-spacing:2px">FISH MARKET</span>
     <button class="sell-btn" style="width:auto;padding:4px 14px" onclick="sellAllFish()">SELL ALL FISH</button>
-  </div>`;
-  html += `<div class="market-grid">`;
+  </div><div class="market-grid">`;
   FISH_TYPES.forEach(f => {
     const qty = gs.cargo[f.id] || 0;
     const hist = gs.priceHistory[f.id];
@@ -1513,19 +1332,17 @@ function buildMarketUI() {
     const curr = gs.market[f.id];
     const diff = curr - prev;
     const trendSymbol = diff > 0 ? '▲' : diff < 0 ? '▼' : '◆';
-    const trendClass = diff > 0 ? 'up' : diff < 0 ? 'dn' : '';
+    const trendClass  = diff > 0 ? 'up' : diff < 0 ? 'dn' : '';
     const locked = f.zone === 'deep' && gs.boatLevel < 3;
     html += `<div class="fish-card">
       <div class="fname"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${f.color};margin-right:5px"></span>${f.name}${f.rare?'<span style="color:#f07070;font-size:9px"> ★RARE</span>':''}</div>
       ${locked ? '<div style="color:#6a4a4a;font-size:10px">🔒 Deep Sea</div>' : `
       <div class="fprice">${curr}g</div>
       <div class="ftrend ${trendClass}">${trendSymbol} ${Math.abs(diff)}g | <span class="qty">${qty} in hold</span></div>
-      <button class="sell-btn" ${qty===0?'disabled':''} onclick="sellFish('${f.id}')">SELL ${qty}x</button>
-      `}
+      <button class="sell-btn" ${qty===0?'disabled':''} onclick="sellFish('${f.id}')">SELL ${qty}x</button>`}
     </div>`;
   });
-  html += `</div>`;
-  html += `<div id="price-graph-container">
+  html += `</div><div id="price-graph-container">
     <h3>PRICE HISTORY (LAST 20 TICKS)</h3>
     <div id="graph-legend">${FISH_TYPES.map(f=>`<span><span class="legend-dot" style="background:${f.color}"></span>${f.name}</span>`).join('')}</div>
     <canvas id="price-graph" width="530" height="120"></canvas>
@@ -1540,21 +1357,16 @@ function drawPriceGraph() {
   const W = canvas.width, H = canvas.height;
   ctx.fillStyle = '#020a14';
   ctx.fillRect(0, 0, W, H);
-
-  // Grid
   ctx.strokeStyle = 'rgba(30,74,110,0.5)';
   ctx.lineWidth = 0.5;
   for (let i = 0; i <= 4; i++) {
     const y = (i / 4) * H;
     ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
   }
-
-  // Find global min/max
   let allPrices = [];
   FISH_TYPES.forEach(f => allPrices = allPrices.concat(gs.priceHistory[f.id]));
   const minP = Math.min(...allPrices) * 0.9;
   const maxP = Math.max(...allPrices) * 1.1;
-
   FISH_TYPES.forEach(f => {
     const hist = gs.priceHistory[f.id];
     if (hist.length < 2) return;
@@ -1562,13 +1374,11 @@ function drawPriceGraph() {
     ctx.lineWidth = 1.5;
     ctx.beginPath();
     hist.forEach((p, i) => {
-      const x = (i / (Math.max(hist.length - 1, 1))) * W;
+      const x = (i / (Math.max(hist.length-1, 1))) * W;
       const y = H - ((p - minP) / (maxP - minP + 1)) * H;
       if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
     });
     ctx.stroke();
-
-    // Last dot
     const lp = hist[hist.length-1];
     const lx = W - 3;
     const ly = H - ((lp - minP) / (maxP - minP + 1)) * H;
@@ -1580,9 +1390,9 @@ function drawPriceGraph() {
 function buildShopUI() {
   let html = `<div style="font-family:'Cinzel',serif;font-size:13px;color:#f0c060;letter-spacing:2px;margin-bottom:12px">UPGRADES & GEAR</div>`;
   UPGRADES.forEach(u => {
-    const owned = gs.ownedUpgrades.includes(u.id);
+    const owned     = gs.ownedUpgrades.includes(u.id);
     const canAfford = gs.gold >= u.cost;
-    const hasLevel = gs.boatLevel >= u.boatLvl;
+    const hasLevel  = gs.boatLevel >= u.boatLvl;
     html += `<div class="upgrade-row">
       <div>
         <div class="uname">${u.name}</div>
@@ -1591,10 +1401,8 @@ function buildShopUI() {
       </div>
       <div style="display:flex;align-items:center">
         <span class="uprice">${u.cost}g</span>
-        ${owned
-          ? `<span class="owned-badge">✓ OWNED</span>`
-          : `<button class="buy-btn" ${(!canAfford||!hasLevel)?'disabled':''} onclick="buyUpgrade('${u.id}')">BUY</button>`
-        }
+        ${owned ? `<span class="owned-badge">✓ OWNED</span>`
+                : `<button class="buy-btn" ${(!canAfford||!hasLevel)?'disabled':''} onclick="buyUpgrade('${u.id}')">BUY</button>`}
       </div>
     </div>`;
   });
@@ -1604,23 +1412,14 @@ function buildShopUI() {
 function buildHangarUI() {
   let html = `<div style="font-family:'Cinzel',serif;font-size:13px;color:#f0c060;letter-spacing:2px;margin-bottom:8px">HANGAR — SCRAP WORKSHOP</div>`;
   html += `<div style="font-size:10px;color:#7ecfff;margin-bottom:12px">Storage: ${gs.hangarUsed}/${gs.hangarcap}</div>`;
-
   html += `<div style="font-size:11px;color:#4a8aae;letter-spacing:1px;margin-bottom:6px">HANGAR INVENTORY</div>`;
-  SCRAP_TYPES.forEach(s => {
-    const qty = gs.hangarInventory[s.id] || 0;
-    html += `<div class="scrap-row"><span>${s.name}</span><span style="color:#f0c060">${qty}</span></div>`;
-  });
-
+  SCRAP_TYPES.forEach(s => { html += `<div class="scrap-row"><span>${s.name}</span><span style="color:#f0c060">${gs.hangarInventory[s.id]||0}</span></div>`; });
   html += `<div style="font-size:11px;color:#4a8aae;letter-spacing:1px;margin:12px 0 6px">CARGO SCRAPS</div>`;
-  SCRAP_TYPES.forEach(s => {
-    const qty = gs.cargo[s.id] || 0;
-    html += `<div class="scrap-row"><span>${s.name} (hold)</span><span style="color:#aaaacc">${qty}</span></div>`;
-  });
+  SCRAP_TYPES.forEach(s => { html += `<div class="scrap-row"><span>${s.name} (hold)</span><span style="color:#aaaacc">${gs.cargo[s.id]||0}</span></div>`; });
   html += `<button class="buy-btn" style="width:100%;margin-top:8px" onclick="moveScrapToHangar()">MOVE ALL SCRAPS TO HANGAR</button>`;
-
   html += `<div style="font-size:11px;color:#4a8aae;letter-spacing:1px;margin:14px 0 6px">CRAFT RECIPES</div>`;
   HANGAR_RECIPES.forEach(r => {
-    const reqStr = Object.entries(r.scraps).map(([k,v]) => `${v}x${k}`).join(', ');
+    const reqStr   = Object.entries(r.scraps).map(([k,v]) => `${v}x${k}`).join(', ');
     const canCraft = Object.entries(r.scraps).every(([k,v]) => (gs.hangarInventory[k]||0) >= v);
     html += `<div class="upgrade-row">
       <div>
@@ -1640,17 +1439,11 @@ function buildInventoryUI() {
   let hasItems = false;
   FISH_TYPES.forEach(f => {
     const qty = gs.cargo[f.id] || 0;
-    if (qty > 0) {
-      hasItems = true;
-      html += `<tr><td>${f.name}</td><td style="color:#88ccff">Fish</td><td>${qty}</td><td style="color:#a0f0a0">${qty * gs.market[f.id]}g</td></tr>`;
-    }
+    if (qty > 0) { hasItems = true; html += `<tr><td>${f.name}</td><td style="color:#88ccff">Fish</td><td>${qty}</td><td style="color:#a0f0a0">${qty * gs.market[f.id]}g</td></tr>`; }
   });
   SCRAP_TYPES.forEach(s => {
     const qty = gs.cargo[s.id] || 0;
-    if (qty > 0) {
-      hasItems = true;
-      html += `<tr><td>${s.name}</td><td style="color:#f0a060">Scrap</td><td>${qty}</td><td style="color:#aaaacc">—</td></tr>`;
-    }
+    if (qty > 0) { hasItems = true; html += `<tr><td>${s.name}</td><td style="color:#f0a060">Scrap</td><td>${qty}</td><td style="color:#aaaacc">—</td></tr>`; }
   });
   if (!hasItems) html += `<tr><td colspan="4" style="color:#4a4a6a;text-align:center">Empty hold</td></tr>`;
   html += `</tbody></table>`;
@@ -1658,7 +1451,7 @@ function buildInventoryUI() {
 }
 
 // ============================================================
-// PHASER GAME
+// PHASER GAME SCENE
 // ============================================================
 class GameScene extends Phaser.Scene {
   constructor() { super('GameScene'); }
@@ -1667,49 +1460,36 @@ class GameScene extends Phaser.Scene {
     window._gameScene = this;
     const W = this.scale.width, H = this.scale.height;
 
-    // Background gradient (deep ocean)
-    this.bgGraphics = this.add.graphics();
+    this.bgGraphics   = this.add.graphics();
+    this.waveGraphics = this.add.graphics();
     this.drawBackground();
 
-    // Wave particles
-    this.waveGraphics = this.add.graphics();
+    this.zones = { island: { x: W/2, y: H*0.5, r: 70 }, deepEntry: { x: W*0.67, y: H/2 } };
 
-    // Zone boundaries
-    this.zones = this.createZones(W, H);
-
-    // Island
     this.islandGfx = this.add.graphics();
     this.drawIsland(W, H);
 
-    // Island label
     this.add.text(W/2, H*0.5 - 80, 'ISLAND HUB', {
       fontFamily: 'Cinzel, serif', fontSize: '10px', color: '#a0f0a0', letterSpacing: 2
     }).setOrigin(0.5);
 
-    // Deep sea label
-    this.dsLabel = this.add.text(W*0.82, H*0.5, 'DEEP SEA', {
+    this.add.text(W*0.82, H*0.5, 'DEEP SEA', {
       fontFamily: 'Cinzel, serif', fontSize: '10px', color: '#8060d0', letterSpacing: 2
     }).setOrigin(0.5);
 
-    // "Enter Island" prompt
     this.shopPrompt = this.add.text(W/2, H*0.5 - 20, '[E] ENTER HUB', {
       fontFamily: 'Share Tech Mono', fontSize: '10px', color: '#7ecfff', alpha: 0.8
     }).setOrigin(0.5).setVisible(false);
 
-    // Boat
     this.boat = this.createBoat();
     this.boatVelocity = { x: 0, y: 0 };
-    this.boatSpeed = 150;
 
-    // Fish in water (visual only)
     this.fishSprites = [];
     this.spawnWaterFish(W, H);
 
-    // Controls
     this.cursors = this.input.keyboard.createCursorKeys();
-    this.wasd = this.input.keyboard.addKeys('W,A,S,D,E,F');
+    this.wasd    = this.input.keyboard.addKeys('W,A,S,D,E,F');
 
-    // Space for fishing/reeling
     this.input.keyboard.on('keydown-SPACE', () => {
       if (fishingActive) reelClick();
       else if (gs.zone !== 'island') startFishing();
@@ -1722,10 +1502,7 @@ class GameScene extends Phaser.Scene {
         } else {
           gs.zone = 'island';
           notify('⚓ Docked at Island Hub!', '');
-          // Auto-sell if enabled
-          if (settings.autoSell) {
-            setTimeout(() => sellAllFish(), 300);
-          }
+          if (settings.autoSell) setTimeout(() => sellAllFish(), 300);
           openModal('market');
         }
         updateHUD();
@@ -1735,26 +1512,16 @@ class GameScene extends Phaser.Scene {
       if (!fishingActive && gs.zone !== 'island') startFishing();
     });
 
-    // Timers
-    this.marketTimer = gs.marketTimer;
-    this.weatherTimer = gs.weatherTimer;
+    this.marketTimer  = 60;
+    this.weatherTimer = 60;
     this.autoLineTimer = 0;
     this.waveTime = 0;
-
-    // Weather particles
-    this.weatherParticles = [];
     this.weatherTime = 0;
 
-    // Interaction prompts
-    this.interactPrompts = [];
-    this.createInteractPrompts(W, H);
-
-    // Input for fishing hint
     this.fishHintText = this.add.text(W/2, H*0.72, '[F/SPACE] FISH', {
       fontFamily: 'Share Tech Mono', fontSize: '9px', color: '#7ecfff', alpha: 0.5
     }).setOrigin(0.5);
 
-    // Zone lock overlay (visual)
     this.lockOverlay = this.add.graphics();
     this.drawDeepSeaLock(W, H);
 
@@ -1766,76 +1533,40 @@ class GameScene extends Phaser.Scene {
     const W = this.scale.width, H = this.scale.height;
     const g = this.bgGraphics;
     g.clear();
-
-    // Main sea
     g.fillGradientStyle(0x020a14, 0x020a14, 0x041428, 0x041428, 1);
     g.fillRect(0, 0, W, H);
-
-    // Open sea zone tint
     g.fillStyle(0x0a2040, 0.15);
     g.fillRect(0, 0, W * 0.65, H);
-
-    // Deep sea zone tint
     g.fillStyle(0x100830, 0.3);
     g.fillRect(W * 0.67, 0, W * 0.33, H);
-
-    // Dividing line
     g.lineStyle(2, 0x4a2090, 0.6);
-    g.beginPath();
-    g.moveTo(W * 0.67, 0);
-    g.lineTo(W * 0.67, H);
-    g.strokePath();
-
-    // Dotted pattern for deep sea
+    g.beginPath(); g.moveTo(W * 0.67, 0); g.lineTo(W * 0.67, H); g.strokePath();
     g.fillStyle(0x3a1060, 0.05);
-    for (let x = W * 0.68; x < W; x += 20) {
-      for (let y = 0; y < H; y += 20) {
+    for (let x = W * 0.68; x < W; x += 20)
+      for (let y = 0; y < H; y += 20)
         g.fillRect(x, y, 10, 10);
-      }
-    }
-  }
-
-  createZones(W, H) {
-    return {
-      island: { x: W/2, y: H*0.5, r: 70 },
-      deepEntry: { x: W * 0.67, y: H/2 }
-    };
   }
 
   drawIsland(W, H) {
     const g = this.islandGfx;
     g.clear();
-    // Island glow
-    g.fillStyle(0x204840, 0.2);
-    g.fillCircle(W/2, H*0.5, 80);
-    // Island body
-    g.fillStyle(0x2a6040, 1);
-    g.fillCircle(W/2, H*0.5, 60);
-    g.fillStyle(0x3a8050, 1);
-    g.fillCircle(W/2 - 5, H*0.5 - 8, 35);
-    // Sand beach
-    g.fillStyle(0xc8a830, 0.7);
-    g.fillCircle(W/2 + 20, H*0.5 + 15, 18);
-    // Shop building
-    g.fillStyle(0x5a4a30, 1);
-    g.fillRect(W/2 - 12, H*0.5 - 8, 24, 20);
-    g.fillStyle(0x8a3030, 1);
-    g.fillTriangle(W/2 - 16, H*0.5 - 8, W/2 + 16, H*0.5 - 8, W/2, H*0.5 - 22);
-    // Shop sign
-    g.fillStyle(0xf0c060, 1);
-    g.fillRect(W/2 - 6, H*0.5 - 4, 12, 6);
+    g.fillStyle(0x204840, 0.2); g.fillCircle(W/2, H*0.5, 80);
+    g.fillStyle(0x2a6040, 1);  g.fillCircle(W/2, H*0.5, 60);
+    g.fillStyle(0x3a8050, 1);  g.fillCircle(W/2 - 5, H*0.5 - 8, 35);
+    g.fillStyle(0xc8a830, 0.7); g.fillCircle(W/2 + 20, H*0.5 + 15, 18);
+    g.fillStyle(0x5a4a30, 1);  g.fillRect(W/2 - 12, H*0.5 - 8, 24, 20);
+    g.fillStyle(0x8a3030, 1);  g.fillTriangle(W/2 - 16, H*0.5 - 8, W/2 + 16, H*0.5 - 8, W/2, H*0.5 - 22);
+    g.fillStyle(0xf0c060, 1);  g.fillRect(W/2 - 6, H*0.5 - 4, 12, 6);
   }
 
   drawDeepSeaLock(W, H) {
     const g = this.lockOverlay;
     g.clear();
     if (gs.boatLevel >= 3) return;
-    // Lock icon area at deep sea entry
     g.lineStyle(2, 0x6a2a2a, 0.8);
     g.strokeRect(W * 0.67 - 1, 0, 2, H);
     g.fillStyle(0x3a0a0a, 0.3);
     g.fillRect(W * 0.67, 0, W * 0.33, H);
-    // Lock symbol
     g.fillStyle(0x8a3030, 0.9);
     g.fillRect(W * 0.68 + 8, H/2 - 12, 16, 14);
     g.lineStyle(3, 0x8a3030, 1);
@@ -1847,55 +1578,32 @@ class GameScene extends Phaser.Scene {
     const W = this.scale.width, H = this.scale.height;
     this.boatX = W * 0.3;
     this.boatY = H * 0.5;
-    this.boatAngle = 0;        // current visual angle (radians), 0 = pointing up (north)
-    this.boatTargetAngle = 0;  // angle we're steering toward
-
-    // Draw initial boat
+    this.boatAngle = 0;
+    this.boatTargetAngle = 0;
     this.redrawBoat(g);
-
-    // Boat wake trail
     this.wake = this.add.graphics();
-
     return g;
   }
 
   redrawBoat(g) {
     g.clear();
-    // Hull — pointed bow at top (y negative), stern at bottom
     g.fillStyle(0x2a6aae, 1);
-    g.fillTriangle(-12, 8, 12, 8, 0, -18); // bow triangle
-    g.fillRect(-12, 4, 24, 14);             // stern body
-    // Cabin
-    g.fillStyle(0x3a8ade, 1);
-    g.fillRect(-6, -4, 12, 14);
-    // Mast
-    g.lineStyle(2, 0xeeeecc, 1);
-    g.lineBetween(0, -4, 0, -16);
-    // Flag
-    g.fillStyle(0xf0c060, 1);
-    g.fillTriangle(0, -16, 8, -12, 0, -8);
-    // Engine glow for higher levels
-    if (gs.boatLevel >= 2) {
-      g.fillStyle(0x60f0a0, 0.5);
-      g.fillCircle(0, 14, 4);
-    }
-    if (gs.boatLevel >= 3) {
-      g.fillStyle(0xa060f0, 0.6);
-      g.fillCircle(0, 14, 6);
-    }
+    g.fillTriangle(-12, 8, 12, 8, 0, -18);
+    g.fillRect(-12, 4, 24, 14);
+    g.fillStyle(0x3a8ade, 1); g.fillRect(-6, -4, 12, 14);
+    g.lineStyle(2, 0xeeeecc, 1); g.lineBetween(0, -4, 0, -16);
+    g.fillStyle(0xf0c060, 1); g.fillTriangle(0, -16, 8, -12, 0, -8);
+    if (gs.boatLevel >= 2) { g.fillStyle(0x60f0a0, 0.5); g.fillCircle(0, 14, 4); }
+    if (gs.boatLevel >= 3) { g.fillStyle(0xa060f0, 0.6); g.fillCircle(0, 14, 6); }
   }
-
-  createInteractPrompts(W, H) {}
 
   spawnWaterFish(W, H) {
     for (let i = 0; i < 12; i++) {
       const x = Math.random() * W * 0.6 + 20;
       const y = Math.random() * H * 0.8 + 20;
-      const isDeep = x > W * 0.68;
-      const color = isDeep ? 0x6040a0 : 0x2060a0;
+      const color = x > W * 0.68 ? 0x6040a0 : 0x2060a0;
       const g = this.add.graphics();
-      g.fillStyle(color, 0.4);
-      g.fillEllipse(0, 0, 10, 5);
+      g.fillStyle(color, 0.4); g.fillEllipse(0, 0, 10, 5);
       g.x = x; g.y = y;
       this.fishSprites.push({ gfx: g, vx: (Math.random()-0.5)*0.5, vy: (Math.random()-0.5)*0.3, timer: Math.random()*100 });
     }
@@ -1905,9 +1613,8 @@ class GameScene extends Phaser.Scene {
     const dt = delta / 1000;
     const W = this.scale.width, H = this.scale.height;
 
-    // Weather/Market timers
-    this.marketTimer -= dt;
-    this.weatherTimer -= dt * 0.3; // weather changes every ~200s
+    this.marketTimer  -= dt;
+    this.weatherTimer -= dt * 0.3;
 
     if (this.marketTimer <= 0) {
       this.marketTimer = settings.marketInterval || 60;
@@ -1918,46 +1625,31 @@ class GameScene extends Phaser.Scene {
       updateWeather();
     }
 
-    // Update HUD timer
     const timerEl = document.getElementById('hud-timer');
     if (timerEl) timerEl.textContent = Math.ceil(this.marketTimer);
 
-    // Auto-line
     this.autoLineTimer += dt;
-    if (this.autoLineTimer >= 1) {
-      this.autoLineTimer = 0;
-      tickAutoLine();
-    }
+    if (this.autoLineTimer >= 1) { this.autoLineTimer = 0; tickAutoLine(); }
 
-    // Boat movement
-    if (!fishingActive && gs.zone !== 'island') {
-      this.handleMovement(dt, W, H);
-    }
+    if (!fishingActive && gs.zone !== 'island') this.handleMovement(dt, W, H);
 
-    // Boat drawing + rotation
     this.boat.setPosition(this.boatX, this.boatY);
     this.redrawBoat(this.boat);
 
-    // Smoothly lerp to target angle, taking shortest arc
     let angleDiff = this.boatTargetAngle - this.boatAngle;
-    // Wrap diff into [-PI, PI] so we always rotate the short way
-    while (angleDiff > Math.PI)  angleDiff -= Math.PI * 2;
+    while (angleDiff >  Math.PI) angleDiff -= Math.PI * 2;
     while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
-    this.boatAngle += angleDiff * Math.min(1, dt * 8); // 8 = turn speed
+    this.boatAngle += angleDiff * Math.min(1, dt * 8);
     this.boat.setRotation(this.boatAngle);
 
-    // Near island check
-    const islandX = W/2, islandY = H*0.5;
-    const distToIsland = Math.hypot(this.boatX - islandX, this.boatY - islandY);
+    const distToIsland = Math.hypot(this.boatX - W/2, this.boatY - H*0.5);
     this.nearIsland = distToIsland < 90;
     this.shopPrompt.setVisible(this.nearIsland);
     this.shopPrompt.setText(gs.zone === 'island' ? '[E] DEPART' : '[E] ENTER HUB');
 
-    // Zone detection
     if (gs.zone !== 'island') {
       if (this.boatX > W * 0.67 && gs.boatLevel < 3) {
         this.boatX = W * 0.67 - 20;
-        // Show lock notice briefly
         const ln = document.getElementById('lock-notice');
         ln.style.display = 'flex';
         clearTimeout(this.lockTimeout);
@@ -1973,30 +1665,25 @@ class GameScene extends Phaser.Scene {
       }
     }
 
-    // Fish hint
     this.fishHintText.setVisible(gs.zone !== 'island' && !fishingActive);
 
-    // Animate water fish
     this.waveTime += dt;
     this.fishSprites.forEach(f => {
       f.timer += dt;
       f.gfx.x += f.vx + Math.sin(f.timer * 1.5) * 0.3;
       f.gfx.y += f.vy + Math.cos(f.timer * 0.8) * 0.1;
-      // Wrap
       if (f.gfx.x > W * 0.65) f.gfx.x = 20;
-      if (f.gfx.x < 10) f.gfx.x = W * 0.64;
-      if (f.gfx.y > H - 10) f.gfx.y = 10;
-      if (f.gfx.y < 10) f.gfx.y = H - 10;
+      if (f.gfx.x < 10)       f.gfx.x = W * 0.64;
+      if (f.gfx.y > H - 10)   f.gfx.y = 10;
+      if (f.gfx.y < 10)       f.gfx.y = H - 10;
     });
 
-    // Wake
     this.wake.clear();
     if (settings.wake && gs.zone !== 'island' && (Math.abs(this.boatVelocity.x) + Math.abs(this.boatVelocity.y) > 10)) {
       this.wake.fillStyle(0x7ecfff, 0.15);
       this.wake.fillEllipse(this.boatX, this.boatY + 10, 20, 8);
     }
 
-    // Weather effects
     this.weatherTime += dt;
     if (!settings.weatherFx) {
       this.waveGraphics.clear();
@@ -2007,9 +1694,8 @@ class GameScene extends Phaser.Scene {
         const wy = (i * 90 + this.weatherTime * 30) % H;
         this.waveGraphics.beginPath();
         this.waveGraphics.moveTo(0, wy);
-        for (let x = 0; x < W; x += 20) {
+        for (let x = 0; x < W; x += 20)
           this.waveGraphics.lineTo(x, wy + Math.sin(x*0.05 + this.weatherTime*2) * 6);
-        }
         this.waveGraphics.strokePath();
       }
     } else if (gs.weather === 'foggy') {
@@ -2023,144 +1709,31 @@ class GameScene extends Phaser.Scene {
 
   handleMovement(dt, W, H) {
     const { cursors, wasd } = this;
-    this.boatSpeed = settings.boatSpeed || 150;
-    const speed = this.boatSpeed * dt;
+    const speed = (settings.boatSpeed || 150) * dt;
     let vx = 0, vy = 0;
-
-    if (cursors.left.isDown || wasd.A.isDown) vx -= speed;
+    if (cursors.left.isDown  || wasd.A.isDown) vx -= speed;
     if (cursors.right.isDown || wasd.D.isDown) vx += speed;
-    if (cursors.up.isDown || wasd.W.isDown) vy -= speed;
-    if (cursors.down.isDown || wasd.S.isDown) vy += speed;
-
+    if (cursors.up.isDown    || wasd.W.isDown) vy -= speed;
+    if (cursors.down.isDown  || wasd.S.isDown) vy += speed;
     this.boatVelocity = { x: vx * 60, y: vy * 60 };
     this.boatX = Phaser.Math.Clamp(this.boatX + vx, 20, W - 20);
     this.boatY = Phaser.Math.Clamp(this.boatY + vy, 20, H - 30);
-
-    // Set target angle only when actually moving
     if (vx !== 0 || vy !== 0) {
-      // atan2 gives angle from east; subtract PI/2 to make 0 = north (up)
       this.boatTargetAngle = Math.atan2(vy, vx) + Math.PI / 2;
     }
   }
 }
 
-
 // ============================================================
-// SIDE PANELS — TOGGLE
-// ============================================================
-const panelState = { left: true, right: true };
-function togglePanel(side) {
-  panelState[side] = !panelState[side];
-  const panel = document.getElementById(side + '-panel');
-  panel.classList.toggle('collapsed', !panelState[side]);
-  const btn = document.getElementById('toggle-' + side);
-  btn.style.opacity = panelState[side] ? '1' : '0.5';
-}
-
-// ============================================================
-// SETTINGS SYSTEM
-// ============================================================
-const settings = {
-  notifications: true,
-  shake: true,
-  autoSell: false,
-  zoneLabel: true,
-  boatSpeed: 150,
-  theme: 'dark',
-};
-
-function applySetting(theme, on) {
-  if (!on) return; // ignore unchecks — only react to checks
-  // Uncheck others
-  ['dark','light','hc'].forEach(t => {
-    const el = document.getElementById('set-' + t);
-    if (el) el.checked = (t === theme);
-  });
-  document.body.classList.remove('light-mode', 'high-contrast');
-  if (theme === 'light') document.body.classList.add('light-mode');
-  if (theme === 'hc')    document.body.classList.add('high-contrast');
-  settings.theme = theme;
-}
-
-// Patch notify to respect settings
-const _notifyOrig = notify;
-// Already defined above; wrap it:
-const _notifyReal = notify;
-window.notifyGated = function(msg, type) {
-  if (!settings.notifications) return;
-  _notifyReal(msg, type);
-};
-// Re-point all notify calls through gate
-// (We override the global after definition)
-// NOTE: We can't re-assign const, so instead we patch the gate at call sites.
-// Simpler: just check inside the existing notify function.
-// Patch notify in-place:
-(function() {
-  const orig = window.notify || notify;
-  // Replace global
-  window.notify = function(msg, type) {
-    if (!settings.notifications) return;
-    orig(msg, type);
-  };
-})();
-
-// ============================================================
-// SESSION STATS
-// ============================================================
-const sessionStats = { fish: 0, goldEarned: 0, misses: 0, ticks: 0 };
-
-function updateStats() {
-  const sf = document.getElementById('stat-fish');
-  const sg = document.getElementById('stat-gold-earned');
-  const sm = document.getElementById('stat-misses');
-  const st = document.getElementById('stat-ticks');
-  if (sf) sf.textContent = sessionStats.fish;
-  if (sg) sg.textContent = sessionStats.goldEarned + 'g';
-  if (sm) sm.textContent = sessionStats.misses;
-  if (st) st.textContent = sessionStats.ticks;
-}
-
-// Patch completeFishing to track stats
-const _completeFishingOrig = completeFishing;
-window.completeFishing = function(success) {
-  if (success && currentFishCandidate && !currentFishCandidate.isScrap) {
-    sessionStats.fish++;
-    updateStats();
-  }
-  _completeFishingOrig(success);
-};
-
-// Patch sellFish to track gold
-const _sellFishOrig = sellFish;
-window.sellFish = function(fishId) {
-  const before = gs.gold;
-  _sellFishOrig(fishId);
-  sessionStats.goldEarned += Math.max(0, gs.gold - before);
-  updateStats();
-};
-
-// Patch updateMarket to count ticks
-const _updateMarketOrig = updateMarket;
-window.updateMarket = function() {
-  _updateMarketOrig();
-  sessionStats.ticks++;
-  updateStats();
-};
-
-// Apply boat speed from settings in the game loop — hook via global
-setInterval(() => {
-  if (window._gameScene) {
-    window._gameScene.boatSpeed = settings.boatSpeed;
-  }
-}, 500);
-
-// ============================================================
-// INIT PHASER (store scene ref for settings)
+// INIT PHASER
 // ============================================================
 const W = Math.min(780, window.innerWidth - 440);
 const H = Math.min(580, window.innerHeight - 8);
 
-const config = {
+document.getElementById('game-container').style.width  = W + 'px';
+document.getElementById('game-container').style.height = H + 'px';
+
+const game = new Phaser.Game({
   type: Phaser.CANVAS,
   canvas: document.getElementById('game-canvas'),
   width: W,
@@ -2168,21 +1741,29 @@ const config = {
   backgroundColor: '#020a14',
   scene: [GameScene],
   parent: 'game-container',
-};
+});
 
-document.getElementById('game-container').style.width = W + 'px';
-document.getElementById('game-container').style.height = H + 'px';
-document.getElementById('game-wrapper').style.position = 'relative';
-
-const game = new Phaser.Game(config);
-
-// Keyboard listener for space (reeling) via DOM
-document.addEventListener('keydown', (e) => {
+// Space bar for reel via DOM (backup)
+document.addEventListener('keydown', e => {
   if (e.code === 'Space' && document.getElementById('fish-minigame').style.display !== 'none') {
     e.preventDefault();
     reelClick();
   }
 });
+
+// Apply saved settings on load
+(function() {
+  applySetting(settings.theme || 'dark', true);
+  const zl = document.getElementById('zone-label');
+  if (zl) zl.style.display = settings.zoneLabel ? 'block' : 'none';
+  const speedSlider = document.getElementById('set-speed');
+  if (speedSlider) { speedSlider.value = settings.boatSpeed; document.getElementById('speed-val').textContent = settings.boatSpeed; }
+  const notifCb = document.getElementById('set-notif');   if (notifCb) notifCb.checked = settings.notifications;
+  const shakeCb = document.getElementById('set-shake');   if (shakeCb) shakeCb.checked = settings.shake;
+  const zlCb    = document.getElementById('set-zonelabel'); if (zlCb) zlCb.checked = settings.zoneLabel;
+  const wfCb    = document.getElementById('set-weatherfx'); if (wfCb) wfCb.checked = settings.weatherFx !== false;
+  const wakeCb  = document.getElementById('set-wake');    if (wakeCb) wakeCb.checked = settings.wake !== false;
+})();
 </script>
 </body>
 </html>
