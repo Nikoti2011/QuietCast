@@ -1282,6 +1282,8 @@ class GameScene extends Phaser.Scene {
     const W = this.scale.width, H = this.scale.height;
     this.boatX = W * 0.3;
     this.boatY = H * 0.5;
+    this.boatAngle = 0;        // current visual angle (radians), 0 = pointing up (north)
+    this.boatTargetAngle = 0;  // angle we're steering toward
 
     // Draw initial boat
     this.redrawBoat(g);
@@ -1294,26 +1296,27 @@ class GameScene extends Phaser.Scene {
 
   redrawBoat(g) {
     g.clear();
-    // Hull
+    // Hull — pointed bow at top (y negative), stern at bottom
     g.fillStyle(0x2a6aae, 1);
-    g.fillRect(-14, -8, 28, 16);
+    g.fillTriangle(-12, 8, 12, 8, 0, -18); // bow triangle
+    g.fillRect(-12, 4, 24, 14);             // stern body
     // Cabin
     g.fillStyle(0x3a8ade, 1);
-    g.fillRect(-6, -14, 14, 12);
+    g.fillRect(-6, -4, 12, 14);
     // Mast
     g.lineStyle(2, 0xeeeecc, 1);
-    g.lineBetween(0, -14, 0, -26);
+    g.lineBetween(0, -4, 0, -16);
     // Flag
     g.fillStyle(0xf0c060, 1);
-    g.fillTriangle(0, -26, 8, -22, 0, -18);
+    g.fillTriangle(0, -16, 8, -12, 0, -8);
     // Engine glow for higher levels
     if (gs.boatLevel >= 2) {
       g.fillStyle(0x60f0a0, 0.5);
-      g.fillCircle(10, 4, 4);
+      g.fillCircle(0, 14, 4);
     }
     if (gs.boatLevel >= 3) {
       g.fillStyle(0xa060f0, 0.6);
-      g.fillCircle(10, 4, 6);
+      g.fillCircle(0, 14, 6);
     }
   }
 
@@ -1366,9 +1369,17 @@ class GameScene extends Phaser.Scene {
       this.handleMovement(dt, W, H);
     }
 
-    // Boat drawing
+    // Boat drawing + rotation
     this.boat.setPosition(this.boatX, this.boatY);
     this.redrawBoat(this.boat);
+
+    // Smoothly lerp to target angle, taking shortest arc
+    let angleDiff = this.boatTargetAngle - this.boatAngle;
+    // Wrap diff into [-PI, PI] so we always rotate the short way
+    while (angleDiff > Math.PI)  angleDiff -= Math.PI * 2;
+    while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
+    this.boatAngle += angleDiff * Math.min(1, dt * 8); // 8 = turn speed
+    this.boat.setRotation(this.boatAngle);
 
     // Near island check
     const islandX = W/2, islandY = H*0.5;
@@ -1456,6 +1467,12 @@ class GameScene extends Phaser.Scene {
     this.boatVelocity = { x: vx * 60, y: vy * 60 };
     this.boatX = Phaser.Math.Clamp(this.boatX + vx, 20, W - 20);
     this.boatY = Phaser.Math.Clamp(this.boatY + vy, 20, H - 30);
+
+    // Set target angle only when actually moving
+    if (vx !== 0 || vy !== 0) {
+      // atan2 gives angle from east; subtract PI/2 to make 0 = north (up)
+      this.boatTargetAngle = Math.atan2(vy, vx) + Math.PI / 2;
+    }
   }
 }
 
