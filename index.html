@@ -8,20 +8,302 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Share+Tech+Mono&display=swap');
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg:        #0a0e1a;
+    --panel-bg:  #050f1e;
+    --border:    #1e4a6e;
+    --accent:    #7ecfff;
+    --gold:      #f0c060;
+    --dim:       #4a6a8a;
+    --text:      #7ecfff;
+    --success:   #60d090;
+    --danger:    #f07070;
+  }
+  body.light-mode {
+    --bg:        #d0e8f8;
+    --panel-bg:  #e8f4fc;
+    --border:    #5a9abe;
+    --accent:    #1a5a8a;
+    --gold:      #b07800;
+    --dim:       #7aaac8;
+    --text:      #1a4a6a;
+    --success:   #1a7a4a;
+    --danger:    #c03030;
+  }
+  body.high-contrast {
+    --bg:        #000000;
+    --panel-bg:  #0a0a0a;
+    --border:    #ffffff;
+    --accent:    #ffffff;
+    --gold:      #ffff00;
+    --dim:       #888888;
+    --text:      #ffffff;
+    --success:   #00ff88;
+    --danger:    #ff4444;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
-    background: #0a0e1a;
+    background: var(--bg);
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
     font-family: 'Share Tech Mono', monospace;
     overflow: hidden;
+    gap: 0;
+    transition: background 0.3s;
+  }
+
+  /* ── SIDE PANELS ─────────────────────────────── */
+  .side-panel {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: var(--panel-bg);
+    border-color: var(--border);
+    overflow: hidden;
+    transition: width 0.3s ease, opacity 0.3s ease, background 0.3s;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .side-panel.left  { border-right: 1px solid var(--border); width: 190px; }
+  .side-panel.right { border-left:  1px solid var(--border); width: 210px; }
+  .side-panel.collapsed { width: 0 !important; opacity: 0; pointer-events: none; }
+
+  .panel-header {
+    padding: 14px 14px 10px;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  .panel-body {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 12px 10px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+  .panel-body::-webkit-scrollbar { width: 3px; }
+  .panel-body::-webkit-scrollbar-thumb { background: var(--border); }
+
+  /* Toggle buttons that sit flush against the game */
+  .toggle-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--panel-bg);
+    border: 1px solid var(--border);
+    color: var(--accent);
+    cursor: pointer;
+    font-size: 14px;
+    padding: 6px 5px;
+    z-index: 50;
+    line-height: 1;
+    transition: background 0.2s, color 0.2s;
+    writing-mode: vertical-rl;
+    letter-spacing: 2px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+  }
+  .toggle-btn:hover { background: var(--border); color: var(--gold); }
+  #toggle-left  { right: -1px; border-left: none; border-radius: 0 4px 4px 0; }
+  #toggle-right { left: -1px;  border-right: none; border-radius: 4px 0 0 4px; }
+
+  /* ── CONTROLS PANEL ──────────────────────────── */
+  .ctrl-section { margin-bottom: 16px; }
+  .ctrl-section-title {
+    font-size: 9px;
+    color: var(--dim);
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--border);
+  }
+  .ctrl-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    font-size: 10px;
+    color: var(--text);
+    white-space: nowrap;
+  }
+  .key-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 26px;
+    height: 20px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-bottom: 2px solid var(--border);
+    border-radius: 3px;
+    font-size: 10px;
+    color: var(--gold);
+    padding: 0 5px;
+    flex-shrink: 0;
+    font-family: 'Share Tech Mono', monospace;
+  }
+  .key-wasd {
+    display: grid;
+    grid-template-columns: repeat(3, 24px);
+    grid-template-rows: repeat(2, 22px);
+    gap: 2px;
+    margin: 6px 0 10px;
+  }
+  .key-wasd .k {
+    display: flex; align-items: center; justify-content: center;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-bottom: 2px solid var(--border);
+    border-radius: 3px;
+    font-size: 10px;
+    color: var(--gold);
+    font-family: 'Share Tech Mono', monospace;
+  }
+  .key-wasd .k.blank { background: transparent; border-color: transparent; }
+
+  /* ── SETTINGS PANEL ──────────────────────────── */
+  .setting-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    gap: 8px;
+  }
+  .setting-label {
+    font-size: 10px;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .setting-label small {
+    display: block;
+    font-size: 8px;
+    color: var(--dim);
+    margin-top: 1px;
+  }
+
+  /* Toggle switch */
+  .toggle-switch {
+    position: relative;
+    width: 36px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+  .toggle-switch input { opacity: 0; width: 0; height: 0; }
+  .toggle-track {
+    position: absolute; inset: 0;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .toggle-track::after {
+    content: '';
+    position: absolute;
+    top: 3px; left: 3px;
+    width: 12px; height: 12px;
+    background: var(--dim);
+    border-radius: 50%;
+    transition: transform 0.2s, background 0.2s;
+  }
+  .toggle-switch input:checked + .toggle-track { background: rgba(30,160,100,0.2); border-color: var(--success); }
+  .toggle-switch input:checked + .toggle-track::after { transform: translateX(16px); background: var(--success); }
+
+  .settings-section-title {
+    font-size: 9px;
+    color: var(--dim);
+    letter-spacing: 2px;
+    margin: 14px 0 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Slider */
+  .setting-slider {
+    width: 100%;
+    accent-color: var(--accent);
+    margin-top: 4px;
+  }
+
+  /* Stat pills */
+  .stat-row {
+    display: flex; justify-content: space-between;
+    font-size: 10px; color: var(--dim);
+    margin-bottom: 5px;
+  }
+  .stat-row span { color: var(--text); }
+
+  /* Theme buttons */
+  .theme-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    margin-top: 6px;
+  }
+  .theme-btn {
+    padding: 5px 4px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: all 0.15s;
+    text-align: center;
+  }
+  .theme-btn:hover, .theme-btn.active { background: var(--border); color: var(--gold); }
+
+  /* Reset save btn */
+  .danger-btn {
+    width: 100%;
+    margin-top: 8px;
+    padding: 6px;
+    background: transparent;
+    border: 1px solid var(--danger);
+    color: var(--danger);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: background 0.2s;
+  }
+  .danger-btn:hover { background: rgba(240,80,80,0.1); }
+
+  body.abyss-mode {
+    --bg:        #04010f;
+    --panel-bg:  #080415;
+    --border:    #5a2a9a;
+    --accent:    #c080ff;
+    --gold:      #ff80c0;
+    --dim:       #5a3a7a;
+    --text:      #c080ff;
+    --success:   #80ffc0;
+    --danger:    #ff4080;
+  }
+
+  #game-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    min-width: 0;
   }
   #game-container {
     position: relative;
-    border: 2px solid #1e4a6e;
+    border: 2px solid var(--border);
     box-shadow: 0 0 40px rgba(30,120,180,0.4), inset 0 0 20px rgba(0,0,0,0.5);
+    transition: border-color 0.3s;
   }
   #ui-overlay {
     position: absolute;
@@ -38,24 +320,24 @@
   }
   .hud-panel {
     background: rgba(5,15,30,0.85);
-    border: 1px solid #1e4a6e;
+    border: 1px solid var(--border);
     padding: 6px 10px;
     font-size: 11px;
-    color: #7ecfff;
+    color: var(--text);
     letter-spacing: 1px;
   }
-  .hud-panel span { color: #f0c060; }
+  .hud-panel span { color: var(--gold); }
   #weather-hud {
     position: absolute;
     top: 8px; right: 8px;
     background: rgba(5,15,30,0.85);
-    border: 1px solid #1e4a6e;
+    border: 1px solid var(--border);
     padding: 6px 10px;
     font-size: 11px;
-    color: #7ecfff;
+    color: var(--text);
   }
-  #weather-hud .wval { color: #a0f0a0; }
-  #weather-hud .wval.stormy { color: #f07070; }
+  #weather-hud .wval { color: var(--success); }
+  #weather-hud .wval.stormy { color: var(--danger); }
   #weather-hud .wval.foggy { color: #c0c0e0; }
 
   /* CARGO BAR */
@@ -331,61 +613,215 @@
 </style>
 </head>
 <body>
-<div id="game-container">
-  <canvas id="game-canvas"></canvas>
 
-  <div id="ui-overlay">
-    <!-- HUD -->
-    <div id="hud">
-      <div class="hud-panel">GOLD <span id="hud-gold">0</span></div>
-      <div class="hud-panel">BOAT LVL <span id="hud-boatlvl">1</span></div>
-      <div class="hud-panel">ZONE <span id="hud-zone">OPEN SEA</span></div>
-    </div>
-    <div id="weather-hud">WEATHER: <span class="wval" id="hud-weather">CLEAR</span> | TIMER: <span id="hud-timer">60</span>s</div>
+<!-- LEFT: CONTROLS PANEL -->
+<div class="side-panel left" id="left-panel">
+  <div class="panel-header">⚓ CONTROLS</div>
+  <div class="panel-body">
 
-    <!-- CARGO BAR -->
-    <div id="cargo-bar">
-      <span style="white-space:nowrap">CARGO</span>
-      <div id="cargo-fill-bg"><div id="cargo-fill" style="width:0%"></div></div>
-      <span id="cargo-text">0/20</span>
-    </div>
-
-    <!-- ZONE LABEL -->
-    <div id="zone-label">OPEN SEA</div>
-
-    <!-- NOTIFICATIONS -->
-    <div id="notif-stack"></div>
-
-    <!-- LOCK NOTICE -->
-    <div id="lock-notice">
-      <h2>🔒 DEEP SEA LOCKED</h2>
-      <p>Requires Boat Level 3 (Engine Upgrade III)</p>
-    </div>
-
-    <!-- FISHING MINIGAME -->
-    <div id="fish-minigame">
-      <h3>🎣 REELING IN...</h3>
-      <div id="reel-bar-bg">
-        <div id="reel-zone"></div>
-        <div id="reel-indicator"></div>
+    <div class="ctrl-section">
+      <div class="ctrl-section-title">MOVEMENT</div>
+      <div class="key-wasd">
+        <div class="k blank"></div><div class="k">W</div><div class="k blank"></div>
+        <div class="k">A</div><div class="k">S</div><div class="k">D</div>
       </div>
-      <div id="reel-progress-text">Hits: 0 / ?</div>
-      <button id="reel-btn" onclick="reelClick()">REEL! [SPACE]</button>
-      <button id="cancel-fish-btn" onclick="cancelFishing()">CANCEL</button>
+      <div class="ctrl-row" style="margin-top:2px;font-size:9px;color:var(--dim)">or Arrow Keys</div>
     </div>
 
-    <!-- MODAL -->
-    <div id="modal-overlay">
-      <div style="position:relative; width:580px;">
-        <span id="modal-close" onclick="closeModal()">✕</span>
-        <div id="modal-box">
-          <div id="modal-tabs"></div>
-          <div id="modal-content"></div>
+    <div class="ctrl-section">
+      <div class="ctrl-section-title">ACTIONS</div>
+      <div class="ctrl-row"><span class="key-badge">F</span> Start Fishing</div>
+      <div class="ctrl-row"><span class="key-badge">SPACE</span> Reel / Fish</div>
+      <div class="ctrl-row"><span class="key-badge">E</span> Enter/Leave Hub</div>
+    </div>
+
+    <div class="ctrl-section">
+      <div class="ctrl-section-title">MINIGAME</div>
+      <div class="ctrl-row" style="flex-direction:column;align-items:flex-start;gap:4px;font-size:9px;color:var(--dim);line-height:1.5">
+        <span>🟢 Green zone sweeps left & right</span>
+        <span>🟡 Yellow bar = your target</span>
+        <span>Press <span style="color:var(--gold)">SPACE</span> when green zone covers yellow bar</span>
+        <span>Hit required number of times to catch!</span>
+      </div>
+    </div>
+
+    <div class="ctrl-section">
+      <div class="ctrl-section-title">ZONES</div>
+      <div class="ctrl-row" style="flex-direction:column;align-items:flex-start;gap:5px;font-size:9px;color:var(--dim);line-height:1.6">
+        <span>⛵ <span style="color:var(--text)">Open Sea</span> — fish & scavenge</span>
+        <span>🏝 <span style="color:var(--text)">Island Hub</span> — shop & sell</span>
+        <span>🌊 <span style="color:var(--text)">Deep Sea</span> — rare fish (Boat Lv3)</span>
+      </div>
+    </div>
+
+    <div class="ctrl-section">
+      <div class="ctrl-section-title">FISH RARITY</div>
+      <div style="font-size:9px;color:var(--dim);line-height:1.8">
+        <div>🐟 Sardine — <span style="color:var(--success)">EASY</span></div>
+        <div>🐟 Mackerel — <span style="color:var(--success)">EASY</span></div>
+        <div>🐟 Tuna — <span style="color:var(--gold)">HARD</span></div>
+        <div>⚡ Swordfish — <span style="color:#c080ff">★ RARE</span> (storm)</div>
+        <div>🌑 Anglerfish — <span style="color:var(--gold)">HARD</span> (deep)</div>
+        <div>👁 Kraken Eye — <span style="color:var(--danger)">⚠ LEGEND</span></div>
+      </div>
+    </div>
+
+  </div>
+  <!-- toggle button sticks out right edge -->
+  <button class="toggle-btn" id="toggle-left" onclick="togglePanel('left')" title="Toggle Controls">CONTROLS</button>
+</div>
+
+<!-- CENTER: GAME -->
+<div id="game-wrapper">
+  <div id="game-container">
+    <canvas id="game-canvas"></canvas>
+
+    <div id="ui-overlay">
+      <!-- HUD -->
+      <div id="hud">
+        <div class="hud-panel">GOLD <span id="hud-gold">0</span></div>
+        <div class="hud-panel">BOAT LVL <span id="hud-boatlvl">1</span></div>
+        <div class="hud-panel">ZONE <span id="hud-zone">OPEN SEA</span></div>
+      </div>
+      <div id="weather-hud">WEATHER: <span class="wval" id="hud-weather">CLEAR</span> | TIMER: <span id="hud-timer">60</span>s</div>
+
+      <!-- CARGO BAR -->
+      <div id="cargo-bar">
+        <span style="white-space:nowrap">CARGO</span>
+        <div id="cargo-fill-bg"><div id="cargo-fill" style="width:0%"></div></div>
+        <span id="cargo-text">0/20</span>
+      </div>
+
+      <!-- ZONE LABEL -->
+      <div id="zone-label">OPEN SEA</div>
+
+      <!-- NOTIFICATIONS -->
+      <div id="notif-stack"></div>
+
+      <!-- LOCK NOTICE -->
+      <div id="lock-notice">
+        <h2>🔒 DEEP SEA LOCKED</h2>
+        <p>Requires Boat Level 3 (Engine Upgrade III)</p>
+      </div>
+
+      <!-- FISHING MINIGAME -->
+      <div id="fish-minigame">
+        <h3>🎣 REELING IN...</h3>
+        <div id="reel-bar-bg">
+          <div id="reel-zone"></div>
+          <div id="reel-indicator"></div>
+        </div>
+        <div id="reel-progress-text">Hits: 0 / ?</div>
+        <button id="reel-btn" onclick="reelClick()">REEL! [SPACE]</button>
+        <button id="cancel-fish-btn" onclick="cancelFishing()">CANCEL</button>
+      </div>
+
+      <!-- MODAL -->
+      <div id="modal-overlay">
+        <div style="position:relative; width:580px;">
+          <span id="modal-close" onclick="closeModal()">✕</span>
+          <div id="modal-box">
+            <div id="modal-tabs"></div>
+            <div id="modal-content"></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<!-- RIGHT: SETTINGS PANEL -->
+<div class="side-panel right" id="right-panel">
+  <button class="toggle-btn" id="toggle-right" onclick="togglePanel('right')" title="Toggle Settings">SETTINGS</button>
+  <div class="panel-header">⚙ SETTINGS</div>
+  <div class="panel-body">
+
+    <div class="settings-section-title">DISPLAY</div>
+
+    <div class="setting-row">
+      <div class="setting-label">Dark Mode<small>Default ocean theme</small></div>
+      <label class="toggle-switch">
+        <input type="checkbox" id="set-dark" checked onchange="applySetting('dark',this.checked)">
+        <span class="toggle-track"></span>
+      </label>
+    </div>
+
+    <div class="setting-row">
+      <div class="setting-label">Light Mode<small>Bright daytime look</small></div>
+      <label class="toggle-switch">
+        <input type="checkbox" id="set-light" onchange="applySetting('light',this.checked)">
+        <span class="toggle-track"></span>
+      </label>
+    </div>
+
+    <div class="setting-row">
+      <div class="setting-label">High Contrast<small>Accessibility mode</small></div>
+      <label class="toggle-switch">
+        <input type="checkbox" id="set-hc" onchange="applySetting('hc',this.checked)">
+        <span class="toggle-track"></span>
+      </label>
+    </div>
+
+    <div class="settings-section-title">GAMEPLAY</div>
+
+    <div class="setting-row">
+      <div class="setting-label">Notifications<small>Catch / market alerts</small></div>
+      <label class="toggle-switch">
+        <input type="checkbox" id="set-notif" checked onchange="settings.notifications=this.checked">
+        <span class="toggle-track"></span>
+      </label>
+    </div>
+
+    <div class="setting-row">
+      <div class="setting-label">Screen Shake<small>On catch / storm</small></div>
+      <label class="toggle-switch">
+        <input type="checkbox" id="set-shake" checked onchange="settings.shake=this.checked">
+        <span class="toggle-track"></span>
+      </label>
+    </div>
+
+    <div class="setting-row">
+      <div class="setting-label">Auto-Sell Fish<small>Sell on dock arrival</small></div>
+      <label class="toggle-switch">
+        <input type="checkbox" id="set-autosell" onchange="settings.autoSell=this.checked">
+        <span class="toggle-track"></span>
+      </label>
+    </div>
+
+    <div class="setting-row">
+      <div class="setting-label">Show Zone Label<small>Watermark on canvas</small></div>
+      <label class="toggle-switch">
+        <input type="checkbox" id="set-zonelabel" checked onchange="settings.zoneLabel=this.checked; document.getElementById('zone-label').style.display=this.checked?'block':'none'">
+        <span class="toggle-track"></span>
+      </label>
+    </div>
+
+    <div style="margin-bottom:12px">
+      <div class="setting-label" style="margin-bottom:5px">Boat Speed <span id="speed-val" style="color:var(--gold)">150</span></div>
+      <input type="range" class="setting-slider" min="60" max="280" value="150" id="set-speed"
+        oninput="document.getElementById('speed-val').textContent=this.value; settings.boatSpeed=+this.value">
+    </div>
+
+    <div style="margin-bottom:12px">
+      <div class="setting-label" style="margin-bottom:5px">UI Scale <span id="scale-val" style="color:var(--gold)">100%</span></div>
+      <input type="range" class="setting-slider" min="70" max="130" value="100" id="set-scale"
+        oninput="document.getElementById('scale-val').textContent=this.value+'%'; document.getElementById('game-wrapper').style.transform='scale('+this.value/100+')'">
+    </div>
+
+    <div class="settings-section-title">STATS</div>
+    <div id="stats-panel">
+      <div class="stat-row">Session Fish: <span id="stat-fish">0</span></div>
+      <div class="stat-row">Session Gold: <span id="stat-gold-earned">0</span></div>
+      <div class="stat-row">Misses: <span id="stat-misses">0</span></div>
+      <div class="stat-row">Market Ticks: <span id="stat-ticks">0</span></div>
+    </div>
+
+    <div class="settings-section-title">SAVE</div>
+    <button class="danger-btn" onclick="if(confirm('Reset all save data?')){localStorage.removeItem('deeptide_save');location.reload()}">🗑 RESET SAVE DATA</button>
+
+  </div>
+</div>
+
 
 <script>
 // ============================================================
@@ -481,9 +917,127 @@ function loadGame() {
 loadGame();
 
 // ============================================================
+// SETTINGS & PANEL JS
+// ============================================================
+const settings = {
+  notifications: true,
+  shake: true,
+  autoSell: false,
+  zoneLabel: true,
+  weatherFx: true,
+  wake: true,
+  fps: false,
+  boatSpeed: 150,
+  theme: 'dark',
+  marketInterval: 60,
+};
+
+// Load saved settings
+try {
+  const sv = JSON.parse(localStorage.getItem('deeptide_settings') || '{}');
+  Object.assign(settings, sv);
+} catch(e) {}
+
+function saveSettings() {
+  localStorage.setItem('deeptide_settings', JSON.stringify(settings));
+}
+
+function togglePanel(side) {
+  const panel = document.getElementById(side === 'left' ? 'left-panel' : 'right-panel');
+  const btn   = document.getElementById('toggle-' + side);
+  const isCollapsed = panel.classList.toggle('collapsed');
+  if (side === 'left') {
+    btn.textContent = isCollapsed ? 'CONTROLS' : 'CONTROLS';
+    btn.style.writingMode = 'vertical-rl';
+    btn.innerHTML = isCollapsed ? '▶ CTRL' : '◀ CTRL';
+  } else {
+    btn.innerHTML = isCollapsed ? 'SETS ◀' : 'SETS ▶';
+  }
+}
+
+function setTheme(t) {
+  const body = document.body;
+  body.classList.remove('light-mode', 'high-contrast', 'abyss-mode');
+  document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+  if (t === 'light') { body.classList.add('light-mode'); document.getElementById('theme-light').classList.add('active'); }
+  else if (t === 'hc') { body.classList.add('high-contrast'); document.getElementById('theme-hc').classList.add('active'); }
+  else if (t === 'deep') { body.classList.add('abyss-mode'); document.getElementById('theme-deep').classList.add('active'); }
+  else { document.getElementById('theme-dark').classList.add('active'); }
+  settings.theme = t;
+  saveSettings();
+}
+
+function applySetting(key, val) {
+  switch(key) {
+    case 'dark':   if(val) setTheme('dark');  break;
+    case 'light':  if(val) setTheme('light'); break;
+    case 'hc':     if(val) setTheme('hc');    break;
+    case 'notif':  settings.notifications = val; break;
+    case 'shake':  settings.shake = val; break;
+    case 'autosell': settings.autoSell = val; break;
+    case 'zonelabel':
+      settings.zoneLabel = val;
+      const zl = document.getElementById('zone-label');
+      if (zl) zl.style.display = val ? 'block' : 'none';
+      break;
+    case 'weatherfx': settings.weatherFx = val; break;
+    case 'wake':   settings.wake = val; break;
+    case 'fps':    settings.fps = val; break;
+    case 'speed':
+      settings.boatSpeed = +val;
+      // Will be picked up by the Phaser scene via settings.boatSpeed
+      break;
+    case 'market':
+      settings.marketInterval = +val;
+      break;
+  }
+  saveSettings();
+}
+
+// Stats tracking
+const sessionStats = { fish: 0, gold: 0, misses: 0, ticks: 0, startTime: Date.now() };
+
+function updateStatsPanel() {
+  const el = (id) => document.getElementById(id);
+  if (el('stat-fish'))         el('stat-fish').textContent        = sessionStats.fish;
+  if (el('stat-gold-earned'))  el('stat-gold-earned').textContent = sessionStats.gold;
+  if (el('stat-misses'))       el('stat-misses').textContent      = sessionStats.misses;
+  if (el('stat-ticks'))        el('stat-ticks').textContent       = sessionStats.ticks;
+  const secs = Math.floor((Date.now() - sessionStats.startTime) / 1000);
+  const mm = String(Math.floor(secs / 60)).padStart(1,'0');
+  const ss = String(secs % 60).padStart(2,'0');
+  if (el('stat-time'))         el('stat-time').textContent        = mm + ':' + ss;
+}
+setInterval(updateStatsPanel, 1000);
+
+function resetSave() {
+  if (confirm('Reset ALL save data? This cannot be undone.')) {
+    localStorage.removeItem('deeptide_save');
+    localStorage.removeItem('deeptide_settings');
+    location.reload();
+  }
+}
+
+// Apply saved settings on load
+(function applyLoadedSettings() {
+  setTheme(settings.theme || 'dark');
+  const zl = document.getElementById('zone-label');
+  if (zl) zl.style.display = settings.zoneLabel ? 'block' : 'none';
+  const speedSlider = document.getElementById('set-speed');
+  if (speedSlider) { speedSlider.value = settings.boatSpeed; document.getElementById('speed-val').textContent = settings.boatSpeed; }
+  const notifCb = document.getElementById('set-notif');
+  if (notifCb) notifCb.checked = settings.notifications;
+  const shakeCb = document.getElementById('set-shake');
+  if (shakeCb) shakeCb.checked = settings.shake;
+  const zlCb = document.getElementById('set-zonelabel');
+  if (zlCb) zlCb.checked = settings.zoneLabel;
+})();
+
+// ============================================================
 // NOTIFICATIONS
 // ============================================================
 function notify(msg, type='') {
+  if (!settings.notifications) return;
   const stack = document.getElementById('notif-stack');
   const el = document.createElement('div');
   el.className = 'notif ' + type;
@@ -514,6 +1068,7 @@ function updateMarket() {
     gs.soldVolume[f.id] = 0;
   });
   notify('📈 Market prices updated!', '');
+  sessionStats.ticks++;
 }
 
 // ============================================================
@@ -691,6 +1246,9 @@ function reelClick() {
   } else {
     // Miss — flash indicator red, lose a hit
     currentFishCandidate.hitsLanded = Math.max(0, currentFishCandidate.hitsLanded - 1);
+    sessionStats.misses++;
+    sessionStats.misses++;
+    updateStats();
     const ind = document.getElementById('reel-indicator');
     if (ind) {
       ind.style.background = '#f07070';
@@ -718,6 +1276,7 @@ function completeFishing(success) {
   } else {
     const fish = currentFishCandidate.fish;
     addCargo(fish.id, 1);
+    sessionStats.fish++;
     notify(`🐟 Caught: ${fish.name}! (${gs.market[fish.id]}g)`, 'good');
   }
   currentFishCandidate = null;
@@ -764,6 +1323,7 @@ function sellFish(fishId) {
   if (qty <= 0) return;
   const earned = qty * gs.market[fishId];
   gs.gold += earned;
+  sessionStats.gold += earned;
   gs.soldVolume[fishId] = (gs.soldVolume[fishId] || 0) + qty;
   gs.cargoCount -= qty;
   delete gs.cargo[fishId];
@@ -1104,6 +1664,7 @@ class GameScene extends Phaser.Scene {
   constructor() { super('GameScene'); }
 
   create() {
+    window._gameScene = this;
     const W = this.scale.width, H = this.scale.height;
 
     // Background gradient (deep ocean)
@@ -1161,6 +1722,10 @@ class GameScene extends Phaser.Scene {
         } else {
           gs.zone = 'island';
           notify('⚓ Docked at Island Hub!', '');
+          // Auto-sell if enabled
+          if (settings.autoSell) {
+            setTimeout(() => sellAllFish(), 300);
+          }
           openModal('market');
         }
         updateHUD();
@@ -1345,7 +1910,7 @@ class GameScene extends Phaser.Scene {
     this.weatherTimer -= dt * 0.3; // weather changes every ~200s
 
     if (this.marketTimer <= 0) {
-      this.marketTimer = 60;
+      this.marketTimer = settings.marketInterval || 60;
       updateMarket();
     }
     if (this.weatherTimer <= 0) {
@@ -1426,14 +1991,16 @@ class GameScene extends Phaser.Scene {
 
     // Wake
     this.wake.clear();
-    if (gs.zone !== 'island' && (Math.abs(this.boatVelocity.x) + Math.abs(this.boatVelocity.y) > 10)) {
+    if (settings.wake && gs.zone !== 'island' && (Math.abs(this.boatVelocity.x) + Math.abs(this.boatVelocity.y) > 10)) {
       this.wake.fillStyle(0x7ecfff, 0.15);
       this.wake.fillEllipse(this.boatX, this.boatY + 10, 20, 8);
     }
 
     // Weather effects
     this.weatherTime += dt;
-    if (gs.weather === 'stormy') {
+    if (!settings.weatherFx) {
+      this.waveGraphics.clear();
+    } else if (gs.weather === 'stormy') {
       this.waveGraphics.clear();
       this.waveGraphics.lineStyle(1, 0x7ecfff, 0.1 + Math.sin(this.weatherTime*3)*0.05);
       for (let i = 0; i < 5; i++) {
@@ -1456,6 +2023,7 @@ class GameScene extends Phaser.Scene {
 
   handleMovement(dt, W, H) {
     const { cursors, wasd } = this;
+    this.boatSpeed = settings.boatSpeed || 150;
     const speed = this.boatSpeed * dt;
     let vx = 0, vy = 0;
 
@@ -1476,11 +2044,121 @@ class GameScene extends Phaser.Scene {
   }
 }
 
+
 // ============================================================
-// INIT PHASER
+// SIDE PANELS — TOGGLE
 // ============================================================
-const W = Math.min(880, window.innerWidth - 4);
-const H = Math.min(600, window.innerHeight - 4);
+const panelState = { left: true, right: true };
+function togglePanel(side) {
+  panelState[side] = !panelState[side];
+  const panel = document.getElementById(side + '-panel');
+  panel.classList.toggle('collapsed', !panelState[side]);
+  const btn = document.getElementById('toggle-' + side);
+  btn.style.opacity = panelState[side] ? '1' : '0.5';
+}
+
+// ============================================================
+// SETTINGS SYSTEM
+// ============================================================
+const settings = {
+  notifications: true,
+  shake: true,
+  autoSell: false,
+  zoneLabel: true,
+  boatSpeed: 150,
+  theme: 'dark',
+};
+
+function applySetting(theme, on) {
+  if (!on) return; // ignore unchecks — only react to checks
+  // Uncheck others
+  ['dark','light','hc'].forEach(t => {
+    const el = document.getElementById('set-' + t);
+    if (el) el.checked = (t === theme);
+  });
+  document.body.classList.remove('light-mode', 'high-contrast');
+  if (theme === 'light') document.body.classList.add('light-mode');
+  if (theme === 'hc')    document.body.classList.add('high-contrast');
+  settings.theme = theme;
+}
+
+// Patch notify to respect settings
+const _notifyOrig = notify;
+// Already defined above; wrap it:
+const _notifyReal = notify;
+window.notifyGated = function(msg, type) {
+  if (!settings.notifications) return;
+  _notifyReal(msg, type);
+};
+// Re-point all notify calls through gate
+// (We override the global after definition)
+// NOTE: We can't re-assign const, so instead we patch the gate at call sites.
+// Simpler: just check inside the existing notify function.
+// Patch notify in-place:
+(function() {
+  const orig = window.notify || notify;
+  // Replace global
+  window.notify = function(msg, type) {
+    if (!settings.notifications) return;
+    orig(msg, type);
+  };
+})();
+
+// ============================================================
+// SESSION STATS
+// ============================================================
+const sessionStats = { fish: 0, goldEarned: 0, misses: 0, ticks: 0 };
+
+function updateStats() {
+  const sf = document.getElementById('stat-fish');
+  const sg = document.getElementById('stat-gold-earned');
+  const sm = document.getElementById('stat-misses');
+  const st = document.getElementById('stat-ticks');
+  if (sf) sf.textContent = sessionStats.fish;
+  if (sg) sg.textContent = sessionStats.goldEarned + 'g';
+  if (sm) sm.textContent = sessionStats.misses;
+  if (st) st.textContent = sessionStats.ticks;
+}
+
+// Patch completeFishing to track stats
+const _completeFishingOrig = completeFishing;
+window.completeFishing = function(success) {
+  if (success && currentFishCandidate && !currentFishCandidate.isScrap) {
+    sessionStats.fish++;
+    updateStats();
+  }
+  _completeFishingOrig(success);
+};
+
+// Patch sellFish to track gold
+const _sellFishOrig = sellFish;
+window.sellFish = function(fishId) {
+  const before = gs.gold;
+  _sellFishOrig(fishId);
+  sessionStats.goldEarned += Math.max(0, gs.gold - before);
+  updateStats();
+};
+
+// Patch updateMarket to count ticks
+const _updateMarketOrig = updateMarket;
+window.updateMarket = function() {
+  _updateMarketOrig();
+  sessionStats.ticks++;
+  updateStats();
+};
+
+// Apply boat speed from settings in the game loop — hook via global
+setInterval(() => {
+  if (window._gameScene) {
+    window._gameScene.boatSpeed = settings.boatSpeed;
+  }
+}, 500);
+
+// ============================================================
+// INIT PHASER (store scene ref for settings)
+// ============================================================
+const W = Math.min(780, window.innerWidth - 440);
+const H = Math.min(580, window.innerHeight - 8);
 
 const config = {
   type: Phaser.CANVAS,
@@ -1494,6 +2172,7 @@ const config = {
 
 document.getElementById('game-container').style.width = W + 'px';
 document.getElementById('game-container').style.height = H + 'px';
+document.getElementById('game-wrapper').style.position = 'relative';
 
 const game = new Phaser.Game(config);
 
